@@ -1,6 +1,7 @@
 # CSC484Project
 
 
+Aryan owes me like $20.
 
 ## Getting started
 
