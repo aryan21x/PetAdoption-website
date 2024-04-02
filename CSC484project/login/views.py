@@ -1,6 +1,10 @@
-from django.template import loader
-from django.http import HttpResponse
+
+from django.views.generic import TemplateView
+from django.shortcuts import render
 
 def login(request):
-    template = loader.get_template('loginView.html')
-    return HttpResponse(template.render())
+    return render(request, 'loginView.html')
+
+class HomePageView(TemplateView):
+    template_name = 'homeView.html' 
+
