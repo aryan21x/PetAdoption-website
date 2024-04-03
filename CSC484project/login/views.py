@@ -37,7 +37,8 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 # Redirect to a success page or home page
-                return HttpResponseRedirect('/success/')
+                return render(request, 'loginView.html')
+                #return HttpResponseRedirect('home')
         else:
             # Invalid login
             return render(request, 'loginView.html', {'error_message': 'Invalid username or password'})
