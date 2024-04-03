@@ -17,6 +17,9 @@ mydb = mysql.connector.connect(
 def login(request):
     return render(request, 'loginView.html')
 
+def welcome(request):
+    return render(request, 'welcome.html')
+
 class HomeView(TemplateView):
     template_name = 'homeView.html'
 
@@ -33,14 +36,11 @@ def login_view(request):
 
         if user_row:
             # Create Django user object
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                # Redirect to a success page or home page
-                return render(request, 'loginView.html')
-                #return HttpResponseRedirect('home')
+            #user = authenticate(request, username=username, password=password)
+            if user_row is not None:
+                return render(request, 'welcome.html', {'username': username})
         else:
-            # Invalid login
+            #Invalid login
             return render(request, 'loginView.html', {'error_message': 'Invalid username or password'})
     else:
         return render(request, 'loginView.html')
