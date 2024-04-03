@@ -60,6 +60,11 @@
             <input type="password" id="password" name="password" required>
             <button type="submit">Login</button>
         </form>
+        <div>
+            {% if error_message %}
+            <p>{{ error_message }}</p>
+            {% endif %}
+        </div>
     </div>
 </body>
 </html>

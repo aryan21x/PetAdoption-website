@@ -17,11 +17,11 @@ Including another URLconf
 # urls.py
 from django.contrib import admin
 from django.urls import path, include
-from login.views import HomePageView  # Import the view for the home page
+from login.views import HomeView  # Import the view for the home page
 
 urlpatterns = [
-    path('', HomePageView.as_view(), name='home'),  # URL pattern for the home page
+    path('', HomeView.as_view(), name='home'),  # URL pattern for the home page
     path('admin/', admin.site.urls),
-    path('login/', include('login.urls')),  # Example: URL pattern for 'login' app
+    path('', include('login.urls')),  # Example: URL pattern for 'login' app
     # Add other URL patterns as needed
 ]
