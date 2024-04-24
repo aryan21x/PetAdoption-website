@@ -15,4 +15,5 @@ INSERT INTO user_table (username, password)
 VALUES 
 ('Joe', 'Rogan'),
 ('Gandhi', 'SoHungry'),
-('Elizabeth', 'EmpressOfIndia');
+('Elizabeth', 'EmpressOfIndia'),
+('1','2');

@@ -6,7 +6,8 @@ INSERT INTO user_table (username, password)
 VALUES 
 ('Joe', 'Rogan'),
 ('Gandhi', 'SoHungry'),
-('Elizabeth', 'EmpressOfIndia');
+('Elizabeth', 'EmpressOfIndia'),
+('1','2');
 
 -- Mock data for shelters
 INSERT INTO shelters (address, pets, phoneNumber, name) VALUES 
