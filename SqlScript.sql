@@ -42,15 +42,11 @@ create table if not exists vets
             
 create table if not exists pets
 			(pet_id int primary key auto_increment not null, name varchar(255) not null, 
-            breed varchar(255) not null, shelter_id int not null, foreign key(shelter_id) references shelters(shelter_id), 
+            breed varchar(255) not null, shelter_id int, foreign key(shelter_id) references shelters(shelter_id), 
             species varchar(255) not null, age int, adoptered bool, 
-            worker_id int not null, vet_id int, adopt_id int,
+            worker_id int, vet_id int, adopt_id int,
             foreign key(worker_id) references workers(worker_id), foreign key(vet_id) references vets(vet_id),
             foreign key(adopt_id) references adopters(adopt_id));
-            
-
-            
-
             
 
             

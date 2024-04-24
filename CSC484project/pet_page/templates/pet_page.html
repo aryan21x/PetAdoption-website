@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pets</title>
+</head>
+<body>
+    <h5>Add a new Pet</h5>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="breed">Breed:</label>
+                <input type="text" class="form-control" id="breed" name="breed">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="species">Species:</label>
+                <input type="text" class="form-control" id="species" name="species">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="age">Age:</label>
+                <input type="text" class="form-control" id="age" name="age">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Pet</button>
+    </form>
+    
+    <h1>Pets</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Breed</th>
+                <th>Shelter ID</th>
+                <th>Species</th>
+                <th>Age</th>
+                <th>Adopted</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pet in pets %}
+            <tr>
+                <td>{{ pet.name }}</td>
+                <td>{{ pet.breed }}</td>
+                <td>{{ pet.shelter_id }}</td>
+                <td>{{ pet.species }}</td>
+                <td>{{ pet.age }}</td>
+                <td>{{ pet.adoptered }}</td>
+                <td>
+                    <form method="post" action="{% url 'delete_pet' pet.pet_id %}">
+                      {% csrf_token %}
+                      <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+{% endblock %}

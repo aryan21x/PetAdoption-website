@@ -1,11 +1,10 @@
 from django.urls import path
-from . import models
-
+from . import views
 # Define URL patterns
 urlpatterns = [
-    path('login/', models.user_login, name='login'),
-    path('welcome/', models.welcome, name='welcome'),
-    path('logout/', models.user_logout, name='logout'),
+    path('login/', views.user_login, name='login'),
+    path('welcome/', views.welcome, name='welcome'),
+    path('logout/', views.user_logout, name='logout'),
 ]
 
 

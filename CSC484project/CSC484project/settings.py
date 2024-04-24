@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'login',
+    'pet_page',
 ]
 
 MIDDLEWARE = [
@@ -139,3 +140,15 @@ DB_HOST = 'localhost'
 DB_NAME = 'project'
 DB_USER = 'rootnew'
 DB_PASSWORD = '1234'
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'project',
+        'USER': 'rootnew',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',   # Or your database host
+        'PORT':'3306',
+    }
+}

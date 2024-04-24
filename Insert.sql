@@ -45,3 +45,5 @@ INSERT INTO pets (name, breed, shelter_id, species, age, adoptered, worker_id, v
 ('Fluffy', 'Persian', 2, 'Cat', 2, 0, 2, NULL, NULL),
 ('Max', 'German Shepherd', 3, 'Dog', 4, 0, 3, 3, 1),
 ('Smokey', 'Siamese', 2, 'Cat', 5, 1, 2, NULL, NULL);
+
+
