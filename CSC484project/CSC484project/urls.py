@@ -23,6 +23,5 @@ urlpatterns = [
     path('', HomeView.as_view(), name='home'),  # URL pattern for the home page
     path('admin/', admin.site.urls),
     path('', include('login.urls')),  # Example: URL pattern for 'login' app
-    path('api/', include('myapi.urls'))
     # Add other URL patterns as needed
 ]

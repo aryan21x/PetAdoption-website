@@ -15,7 +15,7 @@ mydb = mysql.connector.connect(
 )
 
 def login(request):
-    return render(request, 'loginView.html')
+    return render(request, 'login.html')
 
 def welcome(request):
     return render(request, 'welcome.html')
@@ -41,7 +41,7 @@ def login_view(request):
                 return render(request, 'welcome.html', {'username': username})
         else:
             #Invalid login
-            return render(request, 'loginView.html', {'error_message': 'Invalid username or password'})
+            return render(request, 'login.html', {'error_message': 'Invalid username or password'})
     else:
-        return render(request, 'loginView.html')
+        return render(request, 'login.html')
 

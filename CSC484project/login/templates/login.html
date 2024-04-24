@@ -1,4 +1,7 @@
-<!-- login.html -->
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,7 +52,6 @@
     </style>
 </head>
 <body>
-    <div> <a href="{% url 'home' %}">Home</a></div>
     <div class="container">
         <h2>Login</h2>
         <form action="{% url 'login' %}" method="post">
@@ -68,3 +70,4 @@
     </div>
 </body>
 </html>
+{% endblock %}
