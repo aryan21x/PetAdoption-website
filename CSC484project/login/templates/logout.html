@@ -1,6 +1,7 @@
+<!-- welcome.html -->
 
 {% extends 'base.html' %}
-{% block title %} Home {% endblock %}
+{% block title %} Logout{% endblock %}
 
 {% block content %}
 
@@ -9,17 +10,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Logout Page</title>
 </head>
 <body>
     <div class="container">
-        <h2>Welcome {{username}}</h2>
-        
-        <div>
-            {% if error_message %}
-            <p>{{ error_message }}</p>
-            {% endif %}
-        </div>
+        <h2> You have been logged out successfully </h2>
     </div>
 </body>
 </html>

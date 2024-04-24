@@ -17,7 +17,7 @@ Including another URLconf
 # urls.py
 from django.contrib import admin
 from django.urls import path, include
-from login.views import HomeView  # Import the view for the home page
+from login.models import HomeView  # Import the view for the home page
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),  # URL pattern for the home page
