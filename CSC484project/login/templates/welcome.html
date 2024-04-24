@@ -1,7 +1,9 @@
 
+{% extends 'base.html' %}
 {% block title %} Home {% endblock %}
 
 {% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,7 +54,6 @@
     </style>
 </head>
 <body>
-    <div> <a href="{% url 'home' %}">Home</a></div>
     <div class="container">
         <h2>Welcome {{username}}</h2>
         
@@ -64,4 +65,5 @@
     </div>
 </body>
 </html>
-{% block content %}
+
+{% endblock %}
