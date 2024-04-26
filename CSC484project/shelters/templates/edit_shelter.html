@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %} Shelter {% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Edit Shelter</title>
+    </head>
+    <body>
+        <h5>Edit Shelter</h5>
+        <form method="post" action="{% url 'edit_shelter' shelter.shelter_id %}">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="name">address:</label>
+                    <input type="text" class="form-control" id="address" name="address" value="{{ shelter.address }}">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="breed">pets:</label>
+                    <input type="text" class="form-control" id="pets" name="pets" value="{{ shelter.pets }}">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="species">phoneNumber:</label>
+                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" value="{{ shelter.phoneNumber }}">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="age">name:</label>
+                    <input type="text" class="form-control" id="name" name="name" value="{{ shelter.name }}">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Shelter</button>
+            <a class="btn btn-primary" href="{% url 'shelter_page' %}">Cancel</a>
+        </form>
+
+    </body>
+
+</html>
+{% endblock %}

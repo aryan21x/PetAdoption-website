@@ -38,3 +38,50 @@ def delete_shelter(request, shelter_id):
     mydb.commit()
 
     return redirect('shelter_page')
+
+
+@login_required
+def edit_shelter(request, shelter_id):
+    if request.method == 'POST':
+        address = request.POST.get('address')
+        pets = request.POST.get('pets')
+        phoneNumber = request.POST.get('phoneNumber')
+        name = request.POST.get('name')
+
+        cursor = mydb.cursor()
+        cursor.execute("UPDATE shelters SET address=%s, pets=%s, phoneNumber=%s, name=%s WHERE shelter_id=%s", (address, pets, phoneNumber, name, shelter_id))
+        mydb.commit()
+
+        return redirect('shelter_page')
+    
+    cursor = mydb.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM shelters WHERE shelter_id = %s", (shelter_id,))
+    shelters = cursor.fetchone()
+
+    return render(request, 'edit_shelter.html', {'shelter': shelters})
+
+
+@login_required
+def sort_shelter(request):
+    address = request.GET.get('address')
+    pets = request.GET.get('pets')
+    phoneNumber = request.GET.get('phoneNumber')
+    name = request.GET.get('name')
+    
+    cursor = mydb.cursor(dictionary=True)
+    query = "SELECT * FROM shelters WHERE 1=1" 
+    
+    # Adding filters based on provided criteria
+    if address:
+        query += f" AND address LIKE '%{address}%'"
+    if pets:
+        query += f" AND pets LIKE '{pets}'"
+    if phoneNumber:
+        query += f" AND phoneNumber LIKE '{phoneNumber}'"
+    if name:
+        query += f" AND name LIKE '%{name}%'"
+    
+    cursor.execute(query)
+    shelters = cursor.fetchall()
+
+    return render(request, 'shelter_page.html', {'shelters': shelters})

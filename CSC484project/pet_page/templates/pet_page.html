@@ -107,15 +107,15 @@
                     {% endif %}
                 </td>
                 <td>
-                    <form method="post" action="{% url 'delete_pet' pet.pet_id %}">
-                      {% csrf_token %}
-                      <input type="submit" class="btn btn-danger btn-sm" value="Delete">
-                    </form>
-                </td>
-                <td>
                     <form method="get" action="{% url 'edit_pet' pet.pet_id %}">
                       {% csrf_token %}
                       <input type="submit" class="btn btn-primary btn-sm" value="Edit">
+                    </form>
+                </td>
+                <td>
+                    <form method="post" action="{% url 'delete_pet' pet.pet_id %}">
+                      {% csrf_token %}
+                      <input type="submit" class="btn btn-danger btn-sm" value="Delete">
                     </form>
                 </td>
             </tr>
