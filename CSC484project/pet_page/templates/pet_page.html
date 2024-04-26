@@ -34,6 +34,27 @@
         </div>
         <button type="submit" class="btn btn-primary">Add Pet</button>
     </form>
+
+    <h5></h5>
+    <h5></h5>
+
+    <h5>Filter</h5>
+    <form method="get" action="{% url 'sort_pet' %}">
+        {% csrf_token %}
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" value="{{ request.GET.name }}">
+    
+        <label for="breed">Breed:</label>
+        <input type="text" name="breed" id="breed" value="{{ request.GET.breed }}">
+    
+        <label for="species">Species:</label>
+        <input type="text" name="species" id="species" value="{{ request.GET.species }}">
+    
+        <label for="age">Age:</label>
+        <input type="number" name="age" id="age" value="{{ request.GET.age }}">
+    
+        <button type="submit">Filter</button>
+    </form>
     
     <h1>Pets</h1>
     <table class="table">
@@ -55,11 +76,23 @@
                 <td>{{ pet.shelter_id }}</td>
                 <td>{{ pet.species }}</td>
                 <td>{{ pet.age }}</td>
-                <td>{{ pet.adoptered }}</td>
+                <td>
+                    {% if pet.adoptered == 1 %}
+                        Adopted
+                    {% else %}
+                        Needs a Home
+                    {% endif %}
+                </td>
                 <td>
                     <form method="post" action="{% url 'delete_pet' pet.pet_id %}">
                       {% csrf_token %}
                       <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+                    </form>
+                </td>
+                <td>
+                    <form method="get" action="{% url 'edit_pet' pet.pet_id %}">
+                      {% csrf_token %}
+                      <input type="submit" class="btn btn-primary btn-sm" value="Edit">
                     </form>
                 </td>
             </tr>

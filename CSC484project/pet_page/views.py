@@ -33,6 +33,31 @@ def pet_page(request):
     return render(request, 'pet_page.html', {'pets': pets})
 
 @login_required
+def sort_pet(request):
+    name = request.GET.get('name')
+    breed = request.GET.get('breed')
+    species = request.GET.get('species')
+    age = request.GET.get('age')
+    
+    cursor = mydb.cursor(dictionary=True)
+    query = "SELECT * FROM pets WHERE 1=1"  # Starting with a basic query
+    
+    # Adding filters based on provided criteria
+    if name:
+        query += f" AND name LIKE '%{name}%'"
+    if breed:
+        query += f" AND breed LIKE '%{breed}%'"
+    if species:
+        query += f" AND species LIKE '%{species}%'"
+    if age:
+        query += f" AND age = {age}"
+    
+    cursor.execute(query)
+    pets = cursor.fetchall()
+
+    return render(request, 'pet_page.html', {'pets': pets})
+
+@login_required
 def delete_pet(request, pet_id):
     cursor = mydb.cursor()
     cursor.execute("DELETE FROM pets WHERE pet_id = %s", (pet_id,))
@@ -41,7 +66,6 @@ def delete_pet(request, pet_id):
     return redirect('pet_page')
 
 
-# Not implemented Yet
 @login_required
 def edit_pet(request, pet_id):
     if request.method == 'POST':
@@ -55,4 +79,10 @@ def edit_pet(request, pet_id):
         mydb.commit()
 
         return redirect('pet_page')
+    
+    cursor = mydb.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM pets WHERE pet_id = %s", (pet_id,))
+    pet = cursor.fetchone()
+
+    return render(request, 'edit_pet.html', {'pet': pet})
 
