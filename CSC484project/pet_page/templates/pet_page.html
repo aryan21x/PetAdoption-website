@@ -11,7 +11,10 @@
     <title>Pets</title>
 </head>
 <body>
-    <h1> Pets </h1>
+    <div class="d-flex align-items-center">
+        <h1 class="d-inline">Pets</h1>
+        <button id="toggleOn" class="btn btn-primary ml-3">Add Pet</button>
+    </div>
     
     <form id="petForm" method="post">
         {% csrf_token %}
@@ -38,7 +41,6 @@
             <button id="toggleoff" class="btn btn-primary">Cancel</button>
         </div>
     </form>
-    <button id="toggleOn" class="btn btn-primary">Add Pet</button>
     <form method="get" action="{% url 'sort_pet' %}">
         {% csrf_token %}
         <div class="form-row">
