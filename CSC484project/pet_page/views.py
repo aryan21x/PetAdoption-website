@@ -16,10 +16,10 @@ mydb = mysql.connector.connect(
 @login_required
 def pet_page(request):
     if request.method == 'POST':
-        name = request.POST.get('name')
-        breed = request.POST.get('breed')
-        species = request.POST.get('species')
-        age = request.POST.get('age')
+        name = request.POST.get('name2')
+        breed = request.POST.get('breed2')
+        species = request.POST.get('species2')
+        age = request.POST.get('age2')
 
         cursor = mydb.cursor()
         cursor.execute("INSERT INTO pets (name, breed, species, age) VALUES (%s, %s, %s,%s)", (name, breed, species, age))

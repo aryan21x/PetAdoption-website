@@ -11,34 +11,34 @@
     <title>Pets</title>
 </head>
 <body>
-    <h5>Add a new Pet</h5>
-    <form method="post">
+    <h1> Pets </h1>
+    
+    <form id="petForm" method="post">
         {% csrf_token %}
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label for="name">Name:</label>
-                <input type="text" class="form-control" id="name" name="name" required>
+                <input type="text" class="form-control" id="name2" name="name2" required>
             </div>
             <div class="form-group col-md-3">
                 <label for="breed">Breed:</label>
-                <input type="text" class="form-control" id="breed" name="breed" required>
+                <input type="text" class="form-control" id="breed2" name="breed2" required>
             </div>
             <div class="form-group col-md-3">
                 <label for="species">Species:</label>
-                <input type="text" class="form-control" id="species" name="species" required>
+                <input type="text" class="form-control" id="species2" name="species2" required>
             </div>
             <div class="form-group col-md-3">
                 <label for="age">Age:</label>
-                <input type="text" class="form-control" id="age" name="age" required>
+                <input type="text" class="form-control" id="age2" name="age2" required>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Add Pet</button>
+        <div class="d-inline">
+            <button type="submit" class="btn btn-primary mr-2">Add Pet</button>
+            <button id="toggleoff" class="btn btn-primary">Cancel</button>
+        </div>
     </form>
-
-    <h5></h5>
-    <h5></h5>
-
-    <h5>Filter</h5>
+    <button id="toggleOn" class="btn btn-primary">Add Pet</button>
     <form method="get" action="{% url 'sort_pet' %}">
         {% csrf_token %}
         <div class="form-row">
@@ -70,7 +70,10 @@
                 <label class="form-check-label" for="adopted_adopted">Adopted</label>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Filter</button>
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-search"></i>
+        </button>
+        <button id="clearFilter" type="submit" class="btn btn-primary">Clear</button>
     </form>
     
     <h1>Pets</h1>
@@ -124,4 +127,33 @@
     </table>
 </body>
 </html>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.getElementById("petForm");
+        const toggleButton = document.getElementById("toggleOn");
+        const cancelButton = document.getElementById("toggleoff");
+        const clearFilterButton = document.getElementById("clearFilter");
+        form.style.display = "none"; // Hide the form initially
+
+        toggleButton.addEventListener("click", function() {
+            if (form.style.display === "none") {
+                form.style.display = "block";
+                toggleButton.style.display = "none";
+            } else {
+                form.style.display = "none";
+            }
+        });
+
+        cancelButton.addEventListener("click", function() {
+            form.style.display = "none";
+            toggleButton.style.display = "block";
+        });
+        clearFilterButton.addEventListener("click", function() {
+            document.getElementById("name").value = "";
+            document.getElementById("breed").value = "";
+            document.getElementById("species").value = "";
+            document.getElementById("age").value = "";
+        });
+    });
+</script>
 {% endblock %}
