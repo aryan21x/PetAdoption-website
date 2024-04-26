@@ -38,6 +38,8 @@ def sort_pet(request):
     breed = request.GET.get('breed')
     species = request.GET.get('species')
     age = request.GET.get('age')
+    adopted_needs_home = request.GET.get('adopted_needs_home')
+    adopted_adopted = request.GET.get('adopted_adopted')
     
     cursor = mydb.cursor(dictionary=True)
     query = "SELECT * FROM pets WHERE 1=1"  # Starting with a basic query
@@ -51,6 +53,10 @@ def sort_pet(request):
         query += f" AND species LIKE '%{species}%'"
     if age:
         query += f" AND age = {age}"
+    if adopted_needs_home:
+        query += f" AND adoptered = 0"
+    if adopted_adopted:
+        query += f" AND adoptered = 1"
     
     cursor.execute(query)
     pets = cursor.fetchall()

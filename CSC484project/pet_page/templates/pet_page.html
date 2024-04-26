@@ -41,19 +41,36 @@
     <h5>Filter</h5>
     <form method="get" action="{% url 'sort_pet' %}">
         {% csrf_token %}
-        <label for="name">Name:</label>
-        <input type="text" name="name" id="name" value="{{ request.GET.name }}">
-    
-        <label for="breed">Breed:</label>
-        <input type="text" name="breed" id="breed" value="{{ request.GET.breed }}">
-    
-        <label for="species">Species:</label>
-        <input type="text" name="species" id="species" value="{{ request.GET.species }}">
-    
-        <label for="age">Age:</label>
-        <input type="number" name="age" id="age" value="{{ request.GET.age }}">
-    
-        <button type="submit">Filter</button>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ request.GET.name }}">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="breed">Breed:</label>
+                <input type="text" class="form-control" id="breed" name="breed" value="{{ request.GET.breed }}">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="species">Species:</label>
+                <input type="text" class="form-control" id="species" name="species" value="{{ request.GET.species }}">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="age">Age:</label>
+                <input type="number" class="form-control" id="age" name="age" value="{{ request.GET.age }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Adopted:</label><br>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="adopted_needs_home" name="adopted_needs_home" {% if request.GET.adopted == "0" %} checked {% endif %}>
+                <label class="form-check-label" for="adopted_needs_home">Needs a Home</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="adopted_adopted" name="adopted_adopted" {% if request.GET.adopted == "1" %} checked {% endif %}>
+                <label class="form-check-label" for="adopted_adopted">Adopted</label>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Filter</button>
     </form>
     
     <h1>Pets</h1>
