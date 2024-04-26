@@ -73,7 +73,13 @@
             <tr>
                 <td>{{ pet.name }}</td>
                 <td>{{ pet.breed }}</td>
-                <td>{{ pet.shelter_id }}</td>
+                <td>
+                    {% if pet.adoptered == 0 %}
+                        Adopted
+                    {% else %}
+                        {{pet.shelter_id}}
+                    {% endif %}
+                </td>
                 <td>{{ pet.species }}</td>
                 <td>{{ pet.age }}</td>
                 <td>
