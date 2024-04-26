@@ -15,10 +15,10 @@ mydb = mysql.connector.connect(
 @login_required
 def shelter_page(request):
     if request.method == 'POST':
-        address = request.POST.get('address')
-        pets = request.POST.get('pets')
-        phoneNumber = request.POST.get('phoneNumber')
-        name = request.POST.get('name')
+        address = request.POST.get('address2')
+        pets = request.POST.get('pets2')
+        phoneNumber = request.POST.get('phoneNumber2')
+        name = request.POST.get('name2')
 
         cursor = mydb.cursor()
         cursor.execute("INSERT INTO shelters (address, pets, phoneNumber, name) VALUES (%s, %s, %s, %s)", (address, pets, phoneNumber, name))
