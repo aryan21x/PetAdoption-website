@@ -23,7 +23,8 @@ create table if not exists workers
 			(worker_id int primary key auto_increment not null, fName varchar(255) not null, 
             lName varchar(255) not null,  email varchar(255), address varchar(255) not null, 
             shelter_id int,
-			foreign key(shelter_id) references shelters(shelter_id));     
+			foreign key(shelter_id) references shelters(shelter_id),INDEX(shelter_id))
+			AUTO_INCREMENT=1;
             
 create table if not exists adopters
 			(adopt_id int primary key auto_increment not null, fName varchar(255) not null, 

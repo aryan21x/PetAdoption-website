@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shelters</title>
 </head>
-<body>
+<body class ="backGround color-orange">
     <div class="d-flex align-items-center">
         <h1 class="d-inline">Shelters</h1>
         <button id="toggleOn" class="btn btn-primary ml-3">Add Shelter</button>
@@ -68,16 +68,19 @@
             
         </div>
     </form>
-    <table class="table">
-        <thead>
+    <table class="table table-hover bold">
+        <thead class="thread-orange">
             <tr>
-                <th>Address</th>
+                <th> <!-- Set colspan to the number of columns in your table -->
+                    Address
+                </th>
                 <th>Pets</th>
                 <th>Phone Number</th>
                 <th>Name</th>
+                <th colspan="2">Actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="t-orange">
             {% for shelter in shelters %}
             <tr>
                 <td>{{ shelter.address }}</td>
@@ -102,13 +105,24 @@
     </table>
 </body>
 </html>
+<style>
+    .nav-link::before {
+        background-color: orange !important;
+    }
+
+    #petForm{
+        display:none;
+    }
+    .nav-link {
+        color: orange !important;
+    }
+</style>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const form = document.getElementById("petForm");
         const toggleButton = document.getElementById("toggleOn");
         const cancelButton = document.getElementById("toggleoff");
         const clearFilterButton = document.getElementById("clearFilter");
-        form.style.display = "none"; // Hide the form initially
 
         toggleButton.addEventListener("click", function() {
             if (form.style.display === "none") {
@@ -127,7 +141,7 @@
             document.getElementById("name").value = "";
             document.getElementById("address").value = "";
             document.getElementById("phoneNumber").value = "";
-            document.getElementById("age").value = "";
+            document.getElementById("pets").value = "";
         });
     });
 </script>

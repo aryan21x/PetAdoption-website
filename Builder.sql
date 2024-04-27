@@ -8,7 +8,7 @@ create table if not exists user_table
             
 create table if not exists pets
 			(pet_id int primary key auto_increment not null, name varchar(255) not null, 
-            breed varchar(255) not null, );
+            breed varchar(255) not null);
             
 -- get some users
 INSERT INTO user_table (username, password)

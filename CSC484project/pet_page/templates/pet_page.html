@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pets</title>
 </head>
-<body>
+<body class="backGround color-orange">
     <div class="d-flex align-items-center">
         <h1 class="d-inline">Pets</h1>
         <button id="toggleOn" class="btn btn-primary ml-3">Add Pet</button>
@@ -62,7 +62,6 @@
             </div>
         </div>
         <div class="form-group">
-            <label>Adopted:</label><br>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" id="adopted_needs_home" name="adopted_needs_home" {% if request.GET.adopted == "0" %} checked {% endif %}>
                 <label class="form-check-label" for="adopted_needs_home">Needs a Home</label>
@@ -81,8 +80,8 @@
         
     </form>
     
-    <table class="table">
-        <thead>
+    <table class="table table-hover bold">
+        <thead class="thread-orange">
             <tr>
                 <th>Name</th>
                 <th>Breed</th>
@@ -90,9 +89,10 @@
                 <th>Species</th>
                 <th>Age</th>
                 <th>Adopted</th>
+                <th  colspan="2">Actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="t-orange">
             {% for pet in pets %}
             <tr>
                 <td>{{ pet.name }}</td>
@@ -131,13 +131,24 @@
     </table>
 </body>
 </html>
+
+<style>
+    .nav-link::before {
+        background-color: orange !important;
+    }
+    #petForm{
+        display:none;
+    }
+    .nav-link {
+        color: orange !important;
+    }
+</style>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const form = document.getElementById("petForm");
         const toggleButton = document.getElementById("toggleOn");
         const cancelButton = document.getElementById("toggleoff");
         const clearFilterButton = document.getElementById("clearFilter");
-        form.style.display = "none"; // Hide the form initially
 
         toggleButton.addEventListener("click", function() {
             if (form.style.display === "none") {
