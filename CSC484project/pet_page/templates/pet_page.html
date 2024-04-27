@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static%}
 {% block title %} Home {% endblock %}
 
 {% block content %}
@@ -83,9 +83,9 @@
     <table class="table table-hover bold">
         <thead class="thread-orange">
             <tr>
+                <th>Image</th>
                 <th>Name</th>
                 <th>Breed</th>
-                <th>Shelter ID</th>
                 <th>Species</th>
                 <th>Age</th>
                 <th>Adopted</th>
@@ -95,15 +95,13 @@
         <tbody class="t-orange">
             {% for pet in pets %}
             <tr>
+                {% if pet.image_path %}
+                    <td><img src="{{ pet.image_path }}" alt="Image" class="rounded-circle" style="width: 50px; height: 50px;"></td>
+                {% else %}
+                    <td><img src="{% static 'images/default.jpg' %}" alt="Default Image" class="rounded-circle" style="width: 50px; height: 50px;"></td>
+                {% endif %}
                 <td>{{ pet.name }}</td>
                 <td>{{ pet.breed }}</td>
-                <td>
-                    {% if pet.adoptered == 0 %}
-                        Adopted
-                    {% else %}
-                        {{pet.shelter_id}}
-                    {% endif %}
-                </td>
                 <td>{{ pet.species }}</td>
                 <td>{{ pet.age }}</td>
                 <td>

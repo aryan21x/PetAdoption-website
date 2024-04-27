@@ -49,7 +49,7 @@ create table if not exists pets
             foreign key(worker_id) references workers(worker_id), foreign key(vet_id) references vets(vet_id),
             foreign key(adopt_id) references adopters(adopt_id));
             
-
-            
+ALTER TABLE pets
+ADD COLUMN image_path VARCHAR(255) DEFAULT '/static/images/default.jpg';
 
             

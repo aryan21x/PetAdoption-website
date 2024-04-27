@@ -17,10 +17,19 @@
         <h7 style="font-size: 20px">We are here to help you</h7>
         <h7 style="font-size: 20px">find your perfect match</h7>
     </div>
+    {% if user.is_authenticated %}
     <div class="homeElementBtn">
         <a class="btn homeBtn" href="{% url 'pet_page' %}">Start Searching</a>
         <a class="btn homeBtn" href="{% url 'shelter_page' %}">Shelters</a>
     </div>
+    {% endif %}
+
+    {% if not user.is_authenticated %}
+    <div class="homeElementBtn">
+        <a class="btn homeBtn" href="{% url 'login' %}">Login</a>
+        <a class="btn homeBtn" href="{% url 'register' %}">Register</a>
+    </div>
+    {% endif %}
 </body>
 </html>
 {% endblock %}
