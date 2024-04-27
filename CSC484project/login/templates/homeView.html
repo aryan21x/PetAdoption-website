@@ -11,8 +11,16 @@
     <meta charset="UTF-8">
     <title>Home Page</title>
 </head>
-<body class="homeBackground">
-    <h1 class= "test">Welcome to the Home Page!</h1>
+<body class="homeBackground" style="color: white;">
+    <div class="homeElement">
+        <h1 class="bold" style="font-size: 70px">Ready to adopt?</h1>
+        <h7 style="font-size: 20px">We are here to help you</h7>
+        <h7 style="font-size: 20px">find your perfect match</h7>
+    </div>
+    <div class="homeElementBtn">
+        <a class="btn homeBtn" href="{% url 'pet_page' %}">Start Searching</a>
+        <a class="btn homeBtn" href="{% url 'shelter_page' %}">Shelters</a>
+    </div>
 </body>
 </html>
 {% endblock %}

@@ -28,7 +28,7 @@
 
 .nav-link {
     position: relative !important;
-    color: black !important;
+    color: white !important;
     text-decoration: none;
     display: inline-block;
     padding: 0.5rem 0.5rem;
@@ -90,4 +90,49 @@
 
 .bold{
     font-weight: bold;
+}
+
+.homeElement {
+    position: absolute;
+    top: 40%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    text-align: left;
+}
+
+.homeElementBtn {
+    position: absolute;
+    top: 55%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    text-align: left;
+}
+
+.homeBtn{
+    position: relative;
+    background-color: #0ba5bd;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px auto;
+    width: 200px;
+}
+
+
+/* .homeBtn {
+    display: block;
+    width: 200px;
+    padding: 10px;
+    margin: 10px auto;
+    background-color: orange;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+} */
+
+.homeBtn:hover {
+    background-color: darkorange;
 }
