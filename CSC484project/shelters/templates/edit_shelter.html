@@ -10,7 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Edit Shelter</title>
     </head>
-    <body>
+    <body class="backGround color-orange">
         <h5>Edit Shelter</h5>
         <form method="post" action="{% url 'edit_shelter' shelter.shelter_id %}">
             {% csrf_token %}
@@ -38,4 +38,13 @@
     </body>
 
 </html>
+<style>
+    .nav-link::before {
+        background-color: orange !important;
+    }
+
+    .nav-link {
+        color: orange !important;
+    }
+</style>
 {% endblock %}

@@ -44,3 +44,19 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return render(request, 'logout.html')
+
+def register(request):
+    if request.method == 'POST':
+        name = request.POST.get('username')
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+
+        if password1 == password2:
+            cursor = mydb.cursor()
+            cursor.execute("INSERT INTO user_table (username, password) VALUES (%s, %s)", (name, password1))
+            mydb.commit()
+            return redirect('login')
+        else:
+            return render(request, 'register.html', {'error_message': 'password does nott match'})
+
+    return render(request,'register.html')
