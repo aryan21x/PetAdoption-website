@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'login',
     'pet_page',
     'shelters',
+    'workers',
 ]
 
 MIDDLEWARE = [

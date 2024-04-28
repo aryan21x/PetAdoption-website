@@ -85,3 +85,5 @@ def sort_shelter(request):
     shelters = cursor.fetchall()
 
     return render(request, 'shelter_page.html', {'shelters': shelters})
+
+

@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% block title %} Workers {% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workers</title>
+</head>
+<body class ="backGround color-orange">
+    <div class="d-flex align-items-center">
+        <h1 class="d-inline">Workers</h1>
+        <button id="toggleOn" class="btn btn-primary ml-3">Add Worker</button>
+    </div>
+    <form id="petForm" method="post">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="address">Address:</label>
+                <input type="text" class="form-control" id="address2" name="address2" required>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="fName">First Name:</label>
+                <input type="number" class="form-control" id="fName2" name="fName2" required>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="lName">Last Name:</label>
+                <input type="text" class="form-control" id="lName2" name="lNam2" required>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="email">Email:</label>
+                <input type="text" class="form-control" id="name2" name="name2" required>
+            </div>
+        </div>
+        <div class="d-inline">
+            <button type="submit" class="btn btn-primary mr-2">Add Shelter</button>
+            <button id="toggleoff" class="btn btn-primary">Cancel</button>
+        </div>
+    </form>
+    <form method="get" action="{% url 'sort_worker' %}">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="address">Address:</label>
+                <input type="text" class="form-control" id="address" name="address" value="{{ request.GET.address }}">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="shelter_id">Shelter ID:</label>
+                <input type="number" class="form-control" id="shelter_id" name="shelter_id" value="{{ request.GET.shelter_id }}">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="fName">First Name:</label>
+                <input type="text" class="form-control" id="fName" name="fName" value="{{ request.GET.fName }}">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="lName">Last Name:</label>
+                <input type="text" class="form-control" id="lName" name="lName" value="{{ request.GET.lName }}">
+            </div>
+            <div class="d-flex align-items-center">
+                <button type="submit" class="btn btn-primary mr-2">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button id="clearFilter" type="submit" class="btn btn-primary mr-2">Clear</button>
+            </div>
+        </div>
+    </form>
+<!-- Your existing HTML content here -->
+    <table class="table table-hover bold">
+        <thead class="thread-orange">
+            <tr>
+                <th>Worker ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Shelter ID</th>
+                <!-- Add other columns as needed -->
+                <th colspan="2">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="t-orange">
+            {% for worker in workers %}
+            <tr>
+                <td>{{ worker.worker_id }}</td>
+                <td>{{ worker.fName }}</td>
+                <td>{{ worker.lName }}</td>
+                <td>{{ worker.email }}</td>
+                <td>{{ worker.address }}</td>
+                <td>{{ worker.shelter_id }}</td>
+                <!-- Add other columns as needed -->
+                <td>
+                    <a href="{% url 'edit_worker' worker.worker_id %}" class="btn btn-primary btn-sm">Edit</a>
+                </td>
+                <td>
+                    <form method="post" action="{% url 'delete_worker' worker.worker_id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+        
+</body>
+<style>
+    .nav-link::before {
+        background-color: orange !important;
+    }
+
+    #petForm{
+        display:none;
+    }
+    .nav-link {
+        color: orange !important;
+    }
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const toggleButton = document.getElementById("toggleOn");
+        const cancelButton = document.getElementById("toggleoff");
+        const clearFilterButton = document.getElementById("clearFilter");
+
+        toggleButton.addEventListener("click", function() {
+            if (form.style.display === "none") {
+                form.style.display = "block";
+                toggleButton.style.display = "none";
+            } else {
+                form.style.display = "none";
+            }
+        });
+
+        cancelButton.addEventListener("click", function() {
+            form.style.display = "none";
+            toggleButton.style.display = "block";
+        });
+        clearFilterButton.addEventListener("click", function() {
+            document.getElementById("fName").value = "";
+            document.getElementById("lName").value = "";
+            document.getElementById("shelter_id").value = "";
+            document.getElementById("address").value = "";
+        });
+    });
+</script>
+{% endblock %}
+

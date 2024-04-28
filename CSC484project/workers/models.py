@@ -7,9 +7,4 @@ class Worker(models.Model):
     lName = models.CharField(max_length=255)
     email = models.EmailField(max_length=255, null=True, blank=True)
     address = models.CharField(max_length=255)
-    shelter_id = models.ForeignKey('Shelter', on_delete=models.CASCADE)
-    
-    class Meta:
-        indexes = [
-            models.Index(fields=['shelter_id']),
-        ]
+    shelter_id = models.IntegerField()

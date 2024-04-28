@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %} workers {% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Edit worker</title>
+    </head>
+    <body class="backGround color-orange">
+        <h5>Edit worker</h5>
+        <form method="post" action="{% url 'edit_worker' worker.worker_id %}">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="name">address:</label>
+                    <input type="text" class="form-control" id="address" name="address" value="{{ worker.address }}">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="breed">pets:</label>
+                    <input type="text" class="form-control" id="pets" name="pets" value="{{ worker.pets }}">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="species">phoneNumber:</label>
+                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" value="{{ worker.phoneNumber }}">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="age">name:</label>
+                    <input type="text" class="form-control" id="name" name="name" value="{{ worker.name }}">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Update worker</button>
+            <a class="btn btn-primary" href="{% url 'worker_page' %}">Cancel</a>
+        </form>
+    </body>
+
+</html>
+<style>
+    .nav-link::before {
+        background-color: orange !important;
+    }
+
+    .nav-link {
+        color: orange !important;
+    }
+</style>
+{% endblock %}

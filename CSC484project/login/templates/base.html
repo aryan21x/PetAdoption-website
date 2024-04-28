@@ -35,6 +35,11 @@
                     <a class="nav-link" href="{% url 'shelter_page' %}">Shelters</a>
                 </li>
                 {% endif %}
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'worker_page' %}">Workers</a>
+                </li>
+                {% endif %}
             </ul>
             <ul class="navbar-nav">
                 {% if not user.is_authenticated %}
