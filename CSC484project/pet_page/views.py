@@ -20,10 +20,18 @@ def pet_page(request):
         breed = request.POST.get('breed2')
         species = request.POST.get('species2')
         age = request.POST.get('age2')
+        worker_id = request.POST.get('worker_id2')
+        location = request.POST.get('location')
+        adopted = request.POST.get('adopted')
 
-        cursor = mydb.cursor()
-        cursor.execute("INSERT INTO pets (name, breed, species, age) VALUES (%s, %s, %s,%s)", (name, breed, species, age))
-        mydb.commit()
+        if adopted:
+            cursor = mydb.cursor()
+            cursor.execute("INSERT INTO pets (name, breed, species, age, worker_id, adopt_id, adoptered) VALUES (%s, %s, %s,%s,%s,%s,%s)", (name, breed, species, age, worker_id, location, 1))
+            mydb.commit()
+        else:
+            cursor = mydb.cursor()
+            cursor.execute("INSERT INTO pets (name, breed, species, age, worker_id, shelter_id, adoptered) VALUES (%s, %s, %s,%s,%s,%s,%s)", (name, breed, species, age, worker_id, location, 0))
+            mydb.commit()
 
         return redirect('pet_page')
     
@@ -40,6 +48,7 @@ def sort_pet(request):
     age = request.GET.get('age')
     adopted_needs_home = request.GET.get('adopted_needs_home')
     adopted_adopted = request.GET.get('adopted_adopted')
+    workerId = request.GET.get('worker_id')
     
     cursor = mydb.cursor(dictionary=True)
     query = "SELECT * FROM pets WHERE 1=1"  # Starting with a basic query
@@ -49,6 +58,8 @@ def sort_pet(request):
         query += f" AND name LIKE '%{name}%'"
     if breed:
         query += f" AND breed LIKE '%{breed}%'"
+    if workerId:
+        query += f" AND worker_id LIKE '%{workerId}%'"
     if species:
         query += f" AND species LIKE '%{species}%'"
     if age:

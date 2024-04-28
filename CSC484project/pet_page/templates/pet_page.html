@@ -36,6 +36,23 @@
                 <input type="text" class="form-control" id="age2" name="age2" required>
             </div>
         </div>
+        <!-- Additional parameters -->
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="worker_id">Worker ID:</label>
+                <input type="text" class="form-control" id="worker_id2" name="worker_id2">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="location">Location ID:</label>
+                <input type="text" class="form-control" id="location" name="location">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="adopted">Adopted:</label><br>
+                <input type="checkbox" id="adopted" name="adopted" value="adopted">
+                <label for="adopted">Adopted</label>
+            </div>
+        </div>
+        <!-- Buttons -->
         <div class="d-inline">
             <button type="submit" class="btn btn-primary mr-2">Add Pet</button>
             <button id="toggleoff" class="btn btn-primary">Cancel</button>
@@ -51,6 +68,10 @@
             <div class="form-group col-md-3">
                 <label for="breed">Breed:</label>
                 <input type="text" class="form-control" id="breed" name="breed" value="{{ request.GET.breed }}">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="breed">Worker Id:</label>
+                <input type="text" class="form-control" id="worker_id" name="worker_id" value="{{ request.GET.worker_id }}">
             </div>
             <div class="form-group col-md-3">
                 <label for="species">Species:</label>
@@ -86,6 +107,7 @@
                 <th>Image</th>
                 <th>Name</th>
                 <th>Breed</th>
+                <th>Worker Id</th>
                 <th>Species</th>
                 <th>Age</th>
                 <th>Adopted</th>
@@ -102,13 +124,14 @@
                 {% endif %}
                 <td>{{ pet.name }}</td>
                 <td>{{ pet.breed }}</td>
+                <td>{{ pet.worker_id }}</td>
                 <td>{{ pet.species }}</td>
                 <td>{{ pet.age }}</td>
                 <td>
                     {% if pet.adoptered == 1 %}
-                        Adopted
+                        Adopted by Adopter {{pet.adopt_id}}
                     {% else %}
-                        Needs a Home
+                        Needs a Home at Shelter {{pet.shelter_id}}
                     {% endif %}
                 </td>
                 <td>
@@ -166,6 +189,9 @@
             document.getElementById("breed").value = "";
             document.getElementById("species").value = "";
             document.getElementById("age").value = "";
+            document.getElementById("worker_id").value = ""; // Clear worker ID input
+            document.getElementById("adopted_needs_home").checked = false; // Uncheck adopted checkboxes
+            document.getElementById("adopted_adopted").checked = false;
         });
     });
 </script>
