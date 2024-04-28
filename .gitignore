@@ -100,3 +100,5 @@ dmypy.json
 # Poetry
 # Virtualenv
 venv/
+
+.pyv

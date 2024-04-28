@@ -72,6 +72,7 @@
 
 .t-orange{
     color: orange;
+  
 }
 
 .table{
@@ -135,4 +136,9 @@
 
 .homeBtn:hover {
     background-color: darkorange;
+}
+
+
+.outlined {
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
