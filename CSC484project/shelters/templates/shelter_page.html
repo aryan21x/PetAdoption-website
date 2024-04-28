@@ -86,12 +86,12 @@
         <tbody class="t-orange">
             {% for shelter in shelters %}
             <tr>
-                <td>{{ shelter.shelter_id }}</td>
-                <td>{{ shelter.address }}</td>
-                <td>{{ shelter.pets }}</td>
-                <td>{{ shelter.phoneNumber }}</td>
-                <td>{{ shelter.name }}</td>
-                <td>
+                <td class="outlined">{{ shelter.shelter_id }}</td>
+                <td class="outlined">{{ shelter.address }}</td>
+                <td class="outlined">{{ shelter.pets }}</td>
+                <td class="outlined">{{ shelter.phoneNumber }}</td>
+                <td class="outlined">{{ shelter.name }}</td>
+                <td class="outlined">
                     <form method="get" action="{% url 'edit_shelter' shelter.shelter_id %}">
                       {% csrf_token %}
                       <input type="submit" class="btn btn-primary btn-sm" value="Edit">
