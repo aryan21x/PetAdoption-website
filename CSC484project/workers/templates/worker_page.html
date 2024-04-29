@@ -144,6 +144,11 @@
                 form.style.display = "none";
             }
         });
+
+        cancelButton.addEventListener("click", function() {
+            form.style.display = "none";
+            toggleButton.style.display = "block";
+        });
         
         clearFilterButton.addEventListener("click", function() {
             document.getElementById("fName").value = "";
