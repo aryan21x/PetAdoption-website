@@ -13,6 +13,9 @@ mydb = mysql.connector.connect(
     database="project" 
 )
 
+def error_page(request):
+    return render(request, 'error_page.html')
+
 def welcome(request):
     return render(request, 'welcome.html')
 
