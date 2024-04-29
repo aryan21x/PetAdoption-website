@@ -17,7 +17,7 @@
         <button id="switchView" class="btn btn-primary ml-3">Switch View</button>
     </div>
     
-    <form id="petForm" method="post">
+    <form id="petForm" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-row">
             <div class="form-group col-md-3">
@@ -50,10 +50,6 @@
                 <label for="image">Image:</label>
                 <input type="file" class="form-control" id="image" name="image" accept="image/*">
             </div> 
-            {% comment %} <div class="form-group col-md-3">
-                <label for="image_path">Image:</label>
-                <input type="text" class="form-control" id="image_path" name="image_path">
-            </div> {% endcomment %}
             <div class="form-group col-md-3">
                 <label for="adopted">Adopted:</label><br>
                 <input type="checkbox" id="adopted" name="adopted" value="adopted">
