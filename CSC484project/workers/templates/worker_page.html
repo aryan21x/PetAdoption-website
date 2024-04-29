@@ -18,24 +18,28 @@
         {% csrf_token %}
         <div class="form-row">
             <div class="form-group col-md-3">
+                <label for="shelter_id">Shelter Id:</label>
+                <input type="number" class="form-control" id="shelter_id2" name="shelter_id2" required>
+            </div>
+            <div class="form-group col-md-3">
                 <label for="address">Address:</label>
                 <input type="text" class="form-control" id="address2" name="address2" required>
             </div>
             <div class="form-group col-md-3">
                 <label for="fName">First Name:</label>
-                <input type="number" class="form-control" id="fName2" name="fName2" required>
+                <input type="text" class="form-control" id="fName2" name="fName2" required>
             </div>
             <div class="form-group col-md-3">
                 <label for="lName">Last Name:</label>
-                <input type="text" class="form-control" id="lName2" name="lNam2" required>
+                <input type="text" class="form-control" id="lName2" name="lName2" required>
             </div>
             <div class="form-group col-md-3">
                 <label for="email">Email:</label>
-                <input type="text" class="form-control" id="name2" name="name2" required>
+                <input type="text" class="form-control" id="email2" name="email2" required>
             </div>
         </div>
         <div class="d-inline">
-            <button type="submit" class="btn btn-primary mr-2">Add Shelter</button>
+            <button type="submit" class="btn btn-primary mr-2">Add Worker</button>
             <button id="toggleoff" class="btn btn-primary">Cancel</button>
         </div>
     </form>
@@ -43,12 +47,8 @@
         {% csrf_token %}
         <div class="form-row">
             <div class="form-group col-md-3">
-                <label for="address">Address:</label>
-                <input type="text" class="form-control" id="address" name="address" value="{{ request.GET.address }}">
-            </div>
-            <div class="form-group col-md-3">
-                <label for="shelter_id">Shelter ID:</label>
-                <input type="number" class="form-control" id="shelter_id" name="shelter_id" value="{{ request.GET.shelter_id }}">
+                <label for="worker_id">Worker Id:</label>
+                <input type="number" class="form-control" id="worker_id" name="worker_id" value="{{ request.GET.worker_id }}">
             </div>
             <div class="form-group col-md-3">
                 <label for="fName">First Name:</label>
@@ -57,6 +57,18 @@
             <div class="form-group col-md-3">
                 <label for="lName">Last Name:</label>
                 <input type="text" class="form-control" id="lName" name="lName" value="{{ request.GET.lName }}">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="email">Email:</label>
+                <input type="text" class="form-control" id="email" name="email" value="{{ request.GET.email }}">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="address">Address:</label>
+                <input type="text" class="form-control" id="address" name="address" value="{{ request.GET.address }}">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="shelter_id">Shelter ID:</label>
+                <input type="number" class="form-control" id="shelter_id" name="shelter_id" value="{{ request.GET.shelter_id }}">
             </div>
             <div class="d-flex align-items-center">
                 <button type="submit" class="btn btn-primary mr-2">
@@ -119,6 +131,7 @@
 </style>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+        const form = document.getElementById("petForm");
         const toggleButton = document.getElementById("toggleOn");
         const cancelButton = document.getElementById("toggleoff");
         const clearFilterButton = document.getElementById("clearFilter");
@@ -131,16 +144,14 @@
                 form.style.display = "none";
             }
         });
-
-        cancelButton.addEventListener("click", function() {
-            form.style.display = "none";
-            toggleButton.style.display = "block";
-        });
+        
         clearFilterButton.addEventListener("click", function() {
             document.getElementById("fName").value = "";
             document.getElementById("lName").value = "";
             document.getElementById("shelter_id").value = "";
             document.getElementById("address").value = "";
+            document.getElementById("worker_id").value = "";
+            document.getElementById("email").value = "";
         });
     });
 </script>
