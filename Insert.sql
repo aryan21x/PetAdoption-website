@@ -209,6 +209,3 @@ INSERT INTO pets (name, breed, shelter_id, species, age, adoptered, worker_id, v
 ('Teddy', 'Rottweiler', 1, 'Dog', 2, 0, 1, 16, NULL),
 ('Zoe', 'Great Dane', 1, 'Dog', 1, 1, 2, NULL, NULL);
 
-use project;
-SELECT *
-from pets;
