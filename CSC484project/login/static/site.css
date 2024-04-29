@@ -72,18 +72,12 @@
 
 .t-orange{
     color: orange;
-  
 }
 
 .table{
     margin-top: 10px;
     font-size: 17px
 }
-
- /* .table.table-hover tbody tr:hover {
-    background-color: orange; 
-    color: #0ba5bd ;
-}  */
 
 .container-fluid{
     width: 90%;
@@ -138,7 +132,12 @@
     background-color: darkorange;
 }
 
+.outlined{
+    text-shadow: #000 0px 0px 1px;
+    -webkit-font-smoothing: antialiased;
+}
 
-.outlined {
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  .table-hover tbody tr:hover {
+    background-color: orange;
+    color: #0ba5bd;
 }
