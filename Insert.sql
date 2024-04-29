@@ -114,8 +114,7 @@ INSERT INTO workers (fName, lName, email, address, shelter_id) VALUES
 ('Michael', 'Scott', 'michael.scott@example.com', '666 Spruce Dr', 1),
 ('Emma', 'Green', 'emma.green@example.com', '777 Walnut Ct', 6);
 
-SELECT *
-FROM workers;
+
 -- Insert 20 rows of data into the adopters
 INSERT INTO adopters (fName, lName, email, address, pets, phoneNumber) VALUES 
 ('Alice', 'Brown', 'alice.brown@example.com', '101 Elm St', 1, 5551234567),
@@ -189,23 +188,27 @@ INSERT INTO vets (fName, lName, email, address, phoneNumber, businessName) VALUE
 INSERT INTO pets (name, breed, shelter_id, species, age, adoptered, worker_id, vet_id, adopt_id) VALUES 
 ('Rocky', 'Poodle', 1, 'Dog', 2, 0, 10, 1, NULL),
 ('Bella', 'Bulldog', 1, 'Dog', 5, 0, 4, 2, 2),
-('Charlie', 'Beagle', 1, 'Dog', 3, 1, 5, NULL, NULL),
-('Luna', 'Siamese', 2, 'Cat', 1, 0, 16, 4, NULL),
+('Charlie', 'Beagle', 1, 'Dog', 3, 1, 5, NULL, 2),
+('Luna', 'Siamese', 2, 'Cat', 1, 0, 16, 4, 5),
 ('Daisy', 'Golden Retriever', 2, 'Dog', 4, 0, 17, 5, 3),
-('Loki', 'Maine Coon', 2, 'Cat', 2, 1, 8, NULL, NULL),
-('Molly', 'Labrador Retriever', 3, 'Dog', 6, 0, 9, 7, 4),
+('Loki', 'Maine Coon', 2, 'Cat', 2, 1, 8, NULL, 8),
+('Molly', 'Labrador Retriever', 3, 'Dog', 6, 0, 9, 7, NULL),
 ('Sadie', 'Ragdoll', 3, 'Cat', 3, 0, 2, 8, NULL),
-('Bailey', 'Siberian Husky', 3, 'Dog', 4, 1, 1, NULL, NULL),
-('Toby', 'American Shorthair', 1, 'Cat', 5, 0, 3, 10, 5),
-('Jack', 'Boxer', 1, 'Dog', 3, 0, 3, 9, 6),
-('Milo', 'Dachshund', 1, 'Dog', 14, 1, 3, NULL, NULL),
-('Max', 'Sphynx', 2, 'Cat', 4, 0, 4, 11, 7),
+('Bailey', 'Siberian Husky', 3, 'Dog', 4, 1, 1, NULL, 7),
+('Toby', 'American Shorthair', 1, 'Cat', 5, 0, 3, 10, NULL),
+('Jack', 'Boxer', 1, 'Dog', 3, 0, 3, 9, NULL),
+('Milo', 'Dachshund', 1, 'Dog', 14, 1, 3, NULL, 4),
+('Max', 'Sphynx', 2, 'Cat', 4, 0, 4, 11, NULL),
 ('Cooper', 'Yorkshire Terrier', 2, 'Dog', 1, 0, 5, 12, NULL),
-('Buddy', 'Bengal', 2, 'Cat', 3, 1, 6, NULL, NULL),
-('Harley', 'Pomeranian', 3, 'Dog', 5, 0, 7, 13, 8),
+('Buddy', 'Bengal', 2, 'Cat', 3, 0, 6, NULL, NULL),
+('Harley', 'Pomeranian', 3, 'Dog', 5, 1, 7, 13, 8),
 ('Lucy', 'Scottish Fold', 3, 'Cat', 2, 0, 8, 14, NULL),
-('Stella', 'Doberman Pinscher', 3, 'Dog', 4, 1, 9, NULL, NULL),
-('Bear', 'British Shorthair', 1, 'Cat', 3, 0, 2, 15, 9),
+('Stella', 'Doberman Pinscher', 3, 'Dog', 4, 0, 9, NULL, NULL),
+('Bear', 'British Shorthair', 1, 'Cat', 3, 0, 2, 15, NULL),
 ('Teddy', 'Rottweiler', 1, 'Dog', 2, 0, 1, 16, NULL),
-('Zoe', 'Great Dane', 1, 'Dog', 1, 1, 2, NULL, NULL);
+('Zoe', 'Great Dane', 1, 'Dog', 1, 0, 2, NULL, NULL),
+('Chip', 'Persian', 1, 'Cat', 1, 1, 2, NULL, 10),
+('Cookie', 'Sphynx', 1, 'Cat', 1, 0, 2, NULL, NULL),
+('Cream', 'Burmese', 1, 'Cat', 1, 1, 2, NULL, 2),
+('Snow', 'Birman', 1, 'Cat', 1, 0, 2, NULL, NULL);
 

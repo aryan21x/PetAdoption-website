@@ -61,5 +61,3 @@ UPDATE pets
 SET image_path = CONCAT('/static/images/', pet_id, '.jpg')
 WHERE pet_id IS NOT NULL;
 
-
-            
