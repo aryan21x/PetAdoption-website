@@ -113,12 +113,20 @@ def edit_pet(request, pet_id):
     if request.method == 'POST':
         name = request.POST.get('name')
         breed = request.POST.get('breed')
+        worker_id = request.POST.get('worker_id')
+        location = request.POST.get('location')
+        adopted = request.POST.get('adopted')
         species = request.POST.get('species')
         age = request.POST.get('age')
 
-        cursor = mydb.cursor()
-        cursor.execute("UPDATE pets SET name=%s, breed=%s, species=%s, age=%s WHERE pet_id=%s", (name, breed, species, age, pet_id))
-        mydb.commit()
+        if adopted:
+            cursor = mydb.cursor()
+            cursor.execute("UPDATE pets SET name=%s, breed=%s, worker_id=%s, adopt_id=%s, adoptered=%s, species=%s, age=%s WHERE pet_id=%s", (name, breed, worker_id, location, 1, species, age, pet_id))
+            mydb.commit()
+        else:
+            cursor = mydb.cursor()
+            cursor.execute("UPDATE pets SET name=%s, breed=%s, worker_id=%s, sheltert_id=%s, adoptered=%s, species=%s, age=%s WHERE pet_id=%s", (name, breed, worker_id, location, 0, species, age, pet_id))
+            mydb.commit()
 
         return redirect('pet_page')
     

@@ -130,7 +130,7 @@
                     <td class="outlined">{{ pet.age }}</td>
                     <td class="outlined">
                         {% if pet.adoptered == 1 %}
-                            Adopted by {{pet.adopt_id}}
+                            Adopted by Adopter {{pet.adopt_id}}
                         {% else %}
                             Needs a Home at Shelter {{pet.shelter_id}}
                         {% endif %}
@@ -169,7 +169,7 @@
                             <p class="card-text">Age: {{ pet.age }}</p>
                             <p class="card-text">
                                 {% if pet.adoptered == 1 %}
-                                    Adopted by {{pet.adopt_id}}
+                                    Adopted by Adopter {{pet.adopt_id}}
                                 {% else %}
                                     Needs a Home at Shelter {{pet.shelter_id}}
                                 {% endif %}
