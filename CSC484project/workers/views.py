@@ -51,13 +51,14 @@ def delete_worker(request, worker_id):
 @login_required
 def edit_worker(request, worker_id):
     if request.method == 'POST':
-        address = request.POST.get('address')
-        pets = request.POST.get('pets')
-        phoneNumber = request.POST.get('phoneNumber')
-        name = request.POST.get('name')
+        address = request.POST.get('address2')
+        fName = request.POST.get('fName2')
+        shelter_id = request.POST.get('shelter_id2')
+        lName = request.POST.get('lName2')
+        email = request.POST.get('email2')
 
         cursor = mydb.cursor()
-        cursor.execute("UPDATE workers SET address=%s, pets=%s, phoneNumber=%s, name=%s WHERE worker_id=%s", (address, pets, phoneNumber, name, worker_id))
+        cursor.execute("UPDATE workers SET address=%s, fName=%s, shelter_id=%s, lName=%s WHERE worker_id=%s", (address, fName, shelter_id, lName, worker_id))
         mydb.commit()
 
         return redirect('worker_page')

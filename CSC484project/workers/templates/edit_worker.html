@@ -16,21 +16,26 @@
             {% csrf_token %}
             <div class="form-row">
                 <div class="form-group col-md-3">
-                    <label for="name">address:</label>
-                    <input type="text" class="form-control" id="address" name="address" value="{{ worker.address }}">
+                    <label for="shelter_id">Shelter Id:</label>
+                    <input type="number" class="form-control" id="shelter_id2" name="shelter_id2" value="{{ worker.shelter_id }}">
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="breed">pets:</label>
-                    <input type="text" class="form-control" id="pets" name="pets" value="{{ worker.pets }}">
+                    <label for="address">Address:</label>
+                    <input type="text" class="form-control" id="address2" name="address2" value="{{ worker.address }}">
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="species">phoneNumber:</label>
-                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" value="{{ worker.phoneNumber }}">
+                    <label for="fName">First Name:</label>
+                    <input type="text" class="form-control" id="fName2" name="fName2" value="{{ worker.fName }}">
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="age">name:</label>
-                    <input type="text" class="form-control" id="name" name="name" value="{{ worker.name }}">
+                    <label for="lName">Last Name:</label>
+                    <input type="text" class="form-control" id="lName2" name="lName2" value="{{ worker.lName }}">
                 </div>
+                <div class="form-group col-md-3">
+                    <label for="email">Email:</label>
+                    <input type="text" class="form-control" id="email2" name="email2" value="{{ worker.email }}">
+                </div>
+            </div>
             </div>
             <button type="submit" class="btn btn-primary">Update worker</button>
             <a class="btn btn-primary" href="{% url 'worker_page' %}">Cancel</a>
