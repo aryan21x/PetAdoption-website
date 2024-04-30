@@ -95,12 +95,12 @@
         <tbody class="t-orange">
             {% for worker in workers %}
             <tr>
-                <td>{{ worker.worker_id }}</td>
-                <td>{{ worker.fName }}</td>
-                <td>{{ worker.lName }}</td>
-                <td>{{ worker.email }}</td>
-                <td>{{ worker.address }}</td>
-                <td>{{ worker.shelter_id }}</td>
+                <td class="outlined">{{ worker.worker_id }}</td>
+                <td class="outlined">{{ worker.fName }}</td>
+                <td class="outlined">{{ worker.lName }}</td>
+                <td class="outlined">{{ worker.email }}</td>
+                <td class="outlined">{{ worker.address }}</td>
+                <td class="outlined">{{ worker.shelter_id }}</td>
                 <!-- Add other columns as needed -->
                 <td>
                     <a href="{% url 'edit_worker' worker.worker_id %}" class="btn btn-primary btn-sm">Edit</a>
@@ -143,6 +143,11 @@
             } else {
                 form.style.display = "none";
             }
+        });
+
+        cancelButton.addEventListener("click", function() {
+            form.style.display = "none";
+            toggleButton.style.display = "block";
         });
         
         clearFilterButton.addEventListener("click", function() {

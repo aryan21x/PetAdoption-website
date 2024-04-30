@@ -101,4 +101,4 @@ dmypy.json
 # Virtualenv
 venv/
 
-.pyv
+*.pyv

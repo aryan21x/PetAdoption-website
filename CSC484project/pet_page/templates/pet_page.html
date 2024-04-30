@@ -14,9 +14,10 @@
     <div class="d-flex align-items-center">
         <h1 class="d-inline">Pets</h1>
         <button id="toggleOn" class="btn btn-primary ml-3">Add Pet</button>
+        <button id="switchView" class="btn btn-primary ml-3">Switch View</button>
     </div>
     
-    <form id="petForm" method="post">
+    <form id="petForm" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-row">
             <div class="form-group col-md-3">
@@ -36,7 +37,6 @@
                 <input type="text" class="form-control" id="age2" name="age2" required>
             </div>
         </div>
-        <!-- Additional parameters -->
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label for="worker_id">Worker ID:</label>
@@ -47,12 +47,15 @@
                 <input type="text" class="form-control" id="location" name="location">
             </div>
             <div class="form-group col-md-3">
+                <label for="image">Image:</label>
+                <input type="file" class="form-control" id="image" name="image" accept="image/*">
+            </div> 
+            <div class="form-group col-md-3">
                 <label for="adopted">Adopted:</label><br>
                 <input type="checkbox" id="adopted" name="adopted" value="adopted">
                 <label for="adopted">Adopted</label>
             </div>
         </div>
-        <!-- Buttons -->
         <div class="d-inline">
             <button type="submit" class="btn btn-primary mr-2">Add Pet</button>
             <button id="toggleoff" class="btn btn-primary">Cancel</button>
@@ -101,55 +104,94 @@
         
     </form>
     
-    <table class="table table-hover bold">
-        <thead class="thread-orange">
-            <tr>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Breed</th>
-                <th>Worker Id</th>
-                <th>Species</th>
-                <th>Age</th>
-                <th>Adopted</th>
-                <th  colspan="2">Actions</th>
-            </tr>
-        </thead>
-        <tbody class="t-orange">
-            {% for pet in pets %}
-            <tr>
-                {% if pet.image_path %}
-                    <td><img src="{{ pet.image_path }}" alt="Image" class="rounded-circle" style="width: 50px; height: 50px;"></td>
-                {% else %}
-                    <td><img src="{% static 'images/default.jpg' %}" alt="Default Image" class="rounded-circle" style="width: 50px; height: 50px;"></td>
-                {% endif %}
-                <td class="outlined">{{ pet.name }}</td>
-                <td class="outlined">{{ pet.breed }}</td>
-                <td class="outlined">{{ pet.worker_id }}</td>
-                <td class="outlined">{{ pet.species }}</td>
-                <td class="outlined">{{ pet.age }}</td>
-                <td class="outlined">
-                    {% if pet.adoptered == 1 %}
-                        Adopted by Adopter {{pet.adopt_id}}
-                    {% else %}
-                        Needs a Home at Shelter {{pet.shelter_id}}
-                    {% endif %}
-                </td>
-                <td>
-                    <form method="get" action="{% url 'edit_pet' pet.pet_id %}">
-                      {% csrf_token %}
-                      <input type="submit" class="btn btn-primary btn-sm" value="Edit">
-                    </form>
-                </td>
-                <td>
-                    <form method="post" action="{% url 'delete_pet' pet.pet_id %}">
-                      {% csrf_token %}
-                      <input type="submit" class="btn btn-danger btn-sm" value="Delete">
-                    </form>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div id="tableView" style="display: none;">
+        <table class="table table-hover bold">
+            <thead class="thread-orange">
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Breed</th>
+                    <th>Worker Id</th>
+                    <th>Species</th>
+                    <th>Age</th>
+                    <th>Adopted</th>
+                    <th  colspan="2">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="t-orange">
+                {% for pet in pets %}
+                <tr>
+                    <td><img src="{% if pet.image_path %}{{ pet.image_path }}{% else %}{% static 'images/default.jpg' %}{% endif %}"
+                        alt="Image" class="rounded-circle" style="width: 50px; height: 50px;"></td>
+                    <td class="outlined">{{ pet.name }}</td>
+                    <td class="outlined">{{ pet.breed }}</td>
+                    <td class="outlined">{{ pet.worker_id }}</td>
+                    <td class="outlined">{{ pet.species }}</td>
+                    <td class="outlined">{{ pet.age }}</td>
+                    <td class="outlined">
+                        {% if pet.adoptered == 1 %}
+                            Adopted by {{pet.adopt_id}}
+                        {% else %}
+                            Needs a Home at Shelter {{pet.shelter_id}}
+                        {% endif %}
+                    </td>
+                    <td>
+                        <form method="get" action="{% url 'edit_pet' pet.pet_id %}">
+                          {% csrf_token %}
+                          <input type="submit" class="btn btn-primary btn-sm" value="Edit">
+                        </form>
+                    </td>
+                    <td>
+                        <form method="post" action="{% url 'delete_pet' pet.pet_id %}">
+                          {% csrf_token %}
+                          <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div id="cardView">
+        <div class="mt-3">
+            <div class="row">
+                {% for pet in pets %}
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card h-100">
+                        <img src="{% if pet.image_path %}{{ pet.image_path }}{% else %}{% static 'images/default.jpg' %}{% endif %}"
+                             class="card-img-top" alt="Pet Image" style="height: 300px; width: 100%; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ pet.name }}</h5>
+                            <p class="card-text">Breed: {{ pet.breed }}</p>
+                            <p class="card-text">Worker ID: {{ pet.worker_id }}</p>
+                            <p class="card-text">Species: {{ pet.species }}</p>
+                            <p class="card-text">Age: {{ pet.age }}</p>
+                            <p class="card-text">
+                                {% if pet.adoptered == 1 %}
+                                    Adopted by {{pet.adopt_id}}
+                                {% else %}
+                                    Needs a Home at Shelter {{pet.shelter_id}}
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <form method="get" action="{% url 'edit_pet' pet.pet_id %}">
+                                {% csrf_token %}
+                                <input type="submit" class="btn btn-primary btn-sm" value="Edit">
+                            </form>
+                            <form class="mt-3"method="post" action="{% url 'delete_pet' pet.pet_id %}">
+                                {% csrf_token %}
+                                <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
 
@@ -170,6 +212,9 @@
         const toggleButton = document.getElementById("toggleOn");
         const cancelButton = document.getElementById("toggleoff");
         const clearFilterButton = document.getElementById("clearFilter");
+        const switchViewButton = document.getElementById("switchView");
+        const tableView = document.getElementById("tableView");
+        const cardView = document.getElementById("cardView");
 
         toggleButton.addEventListener("click", function() {
             if (form.style.display === "none") {
@@ -193,6 +238,16 @@
             document.getElementById("worker_id").value = ""; // Clear worker ID input
             document.getElementById("adopted_needs_home").checked = false; // Uncheck adopted checkboxes
             document.getElementById("adopted_adopted").checked = false;
+        });
+
+        switchViewButton.addEventListener("click", function() {
+            if (cardView.style.display === "block") {
+                cardView.style.display = "none";
+                tableView.style.display = "block";
+            } else {
+                cardView.style.display = "block";
+                tableView.style.display = "none";
+            }
         });
     });
 </script>

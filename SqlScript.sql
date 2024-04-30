@@ -47,8 +47,19 @@ create table if not exists pets
             worker_id int, vet_id int, adopt_id int,
             foreign key(worker_id) references workers(worker_id), foreign key(vet_id) references vets(vet_id),
             foreign key(adopt_id) references adopters(adopt_id));
-            
+        
+-- Drop the existing image_path column
 ALTER TABLE pets
-ADD COLUMN image_path VARCHAR(255) DEFAULT '/static/images/default.jpg';
+DROP COLUMN image_path;
 
-            
+-- Add the new image_path column with the desired default value
+ALTER TABLE pets
+ADD COLUMN image_path VARCHAR(255) DEFAULT '';
+
+-- Update image_path with new values
+UPDATE pets
+SET image_path = CONCAT('/static/images/', pet_id, '.jpg')
+WHERE pet_id IS NOT NULL;
+
+Select *
+from pets;

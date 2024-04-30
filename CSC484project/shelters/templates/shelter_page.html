@@ -1,6 +1,6 @@
 
 {% extends 'base.html' %}
-{% block title %} Shelters {% endblock %}
+{% block title %} Adopters {% endblock %}
 
 {% block content %}
 <!DOCTYPE html>
@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shelters</title>
+    <title>Adopters</title>
 </head>
 <body class ="backGround color-orange">
     <div class="d-flex align-items-center">
@@ -65,18 +65,13 @@
                 </button>
                 <button id="clearFilter" type="submit" class="btn btn-primary mr-2">Clear</button>
             </div>
-            
         </div>
     </form>
     <table class="table table-hover bold">
         <thead class="thread-orange">
             <tr>
-                <th> <!-- Set colspan to the number of columns in your table -->
-                    Id
-                </th>
-                <th> 
-                    Address
-                </th>
+                <th>Id</th>
+                <th>Address</th>
                 <th>Pets</th>
                 <th>Phone Number</th>
                 <th>Name</th>

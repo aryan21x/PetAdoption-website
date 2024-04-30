@@ -26,4 +26,5 @@ urlpatterns = [
     path('', include('pet_page.urls')), # URL pattern for 'pets' app
     path('', include('shelters.urls')), # URL pattern for 'shetters' app
     path('', include('workers.urls')), # URL pattern for 'shetters' app
+    path('', include('adopters.urls')), # URL pattern for 'shetters' app
 ]

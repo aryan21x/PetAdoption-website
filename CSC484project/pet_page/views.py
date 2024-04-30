@@ -4,6 +4,8 @@ from .models import Pet
 import mysql.connector
 from django.conf import settings
 from django.shortcuts import redirect
+import os
+import uuid
 
 mydb = mysql.connector.connect(
             host=settings.DB_HOST,
@@ -11,6 +13,9 @@ mydb = mysql.connector.connect(
             password=settings.DB_PASSWORD,
             database=settings.DB_NAME
         )
+
+UPLOAD_FOLDER = 'pet_page\\static\\images'
+SAVE_FOLDER = '/static/images'
 
 # Create your views here.
 @login_required
@@ -23,14 +28,24 @@ def pet_page(request):
         worker_id = request.POST.get('worker_id2')
         location = request.POST.get('location')
         adopted = request.POST.get('adopted')
+        file = request.FILES.get('image')
+        filepath = "/static/images/default.jpg"
+
+        if file:
+            filename = str(uuid.uuid4()) + '.jpg'
+            filepath2 = os.path.join(settings.BASE_DIR, UPLOAD_FOLDER, filename)
+            filepath = os.path.join(SAVE_FOLDER, filename)
+            with open(filepath2, 'wb+') as destination:
+                for chunk in file.chunks():
+                    destination.write(chunk)
 
         if adopted:
             cursor = mydb.cursor()
-            cursor.execute("INSERT INTO pets (name, breed, species, age, worker_id, adopt_id, adoptered) VALUES (%s, %s, %s,%s,%s,%s,%s)", (name, breed, species, age, worker_id, location, 1))
+            cursor.execute("INSERT INTO pets (name, breed, species, age, worker_id, adopt_id, adoptered, image_path) VALUES (%s, %s, %s,%s,%s,%s,%s,%s)", (name, breed, species, age, worker_id, location, 1,filepath))
             mydb.commit()
         else:
             cursor = mydb.cursor()
-            cursor.execute("INSERT INTO pets (name, breed, species, age, worker_id, shelter_id, adoptered) VALUES (%s, %s, %s,%s,%s,%s,%s)", (name, breed, species, age, worker_id, location, 0))
+            cursor.execute("INSERT INTO pets (name, breed, species, age, worker_id, shelter_id, adoptered, image_path) VALUES (%s, %s, %s,%s,%s,%s,%s,%s)", (name, breed, species, age, worker_id, location, 0,filepath))
             mydb.commit()
 
         return redirect('pet_page')
@@ -51,7 +66,7 @@ def sort_pet(request):
     workerId = request.GET.get('worker_id')
     
     cursor = mydb.cursor(dictionary=True)
-    query = "SELECT * FROM pets WHERE 1=1"  # Starting with a basic query
+    query = "SELECT * FROM pets WHERE 1=1"
     
     # Adding filters based on provided criteria
     if name:
@@ -76,6 +91,16 @@ def sort_pet(request):
 
 @login_required
 def delete_pet(request, pet_id):
+    # cursor = mydb.cursor(dictionary=True)
+    # cursor.execute("SELECT * FROM pets WHERE pet_id = %s", (pet_id,))
+    # pet = cursor.fetchone()
+
+    # image_path = pet['image_path']
+    # _, filename = os.path.split(image_path)
+    # filepath = os.path.join(settings.BASE_DIR, filename)
+    # if os.path.exists(filepath):
+    #     os.remove(image_path)
+    
     cursor = mydb.cursor()
     cursor.execute("DELETE FROM pets WHERE pet_id = %s", (pet_id,))
     mydb.commit()
