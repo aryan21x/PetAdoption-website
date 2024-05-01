@@ -41,7 +41,7 @@ def user_login(request):
         if user is not None:
             # Login the user
             login(request, user)
-            return render(request, 'homeView.html')
+            return home(request)
         else:
             # Invalid login
             return render(request, 'login.html', {'error_message': 'Invalid username or password'})

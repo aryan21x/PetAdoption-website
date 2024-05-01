@@ -162,6 +162,7 @@ def edit_pet(request, pet_id):
 
     return render(request, 'edit_pet.html', {'pet': pet})
 
+@login_required
 def homePet(request, pet_id):
     cursor = mydb.cursor(dictionary=True)
     query = "SELECT * FROM pets WHERE 1=1"
