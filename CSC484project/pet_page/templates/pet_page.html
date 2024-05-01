@@ -47,7 +47,7 @@
                 <input type="text" class="form-control" id="vet_id2" name="vet_id2">
             </div>
             <div class="form-group col-md-3">
-                <label for="location">Shelter ID:</label>
+                <label for="location">Shelter ID or Adopt ID:</label>
                 <input type="text" class="form-control" id="location2" name="location2">
             </div>
             <div class="form-group col-md-3">
@@ -270,7 +270,7 @@
         deleteForms.forEach(form => {
             form.addEventListener('submit', function(event) {
                 event.preventDefault();
-                if (confirm("Are you sure you want to delete this business?")) {
+                if (confirm("Are you sure you want to delete this Pet?")) {
                     this.submit();
                 }
             });
