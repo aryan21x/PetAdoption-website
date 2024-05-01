@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'shelters',
     'workers',
     'adopters',
+    'vets',
 ]
 
 MIDDLEWARE = [

@@ -45,6 +45,11 @@
                     <a class="nav-link" href="{% url 'adopter_page' %}">Adopters</a>
                 </li>
                 {% endif %}
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'vet_page' %}">Veterinarians</a>
+                </li>
+                {% endif %}
             </ul>
             <ul class="navbar-nav">
                 {% if not user.is_authenticated %}

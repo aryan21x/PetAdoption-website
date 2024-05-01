@@ -15,5 +15,5 @@ class Pet(models.Model):
     worker_id = models.IntegerField()
     vet_id = models.IntegerField(null=True, blank=True)
     adopt_id = models.IntegerField(null=True, blank=True)
-    image_path = models.CharField(max_length=255)
+    image_path = models.CharField(max_length=255, default="/static/images/default.jpg") 
 
