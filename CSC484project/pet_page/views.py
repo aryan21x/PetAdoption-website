@@ -40,16 +40,30 @@ def pet_page(request):
                 for chunk in file.chunks():
                     destination.write(chunk)
 
-        if adopted:
-            cursor = mydb.cursor()
-            cursor.execute("INSERT INTO pets (name, breed, species, age, worker_id, adopt_id, adoptered, vet_id, image_path) VALUES (%s, %s, %s,%s,%s,%s,%s,%s,%s)", (name, breed, species, age, worker_id, location, 1,vet_id,filepath))
-            mydb.commit()
-        else:
-            cursor = mydb.cursor()
-            cursor.execute("INSERT INTO pets (name, breed, species, age, worker_id, shelter_id, adoptered, vet_id,image_path) VALUES (%s, %s, %s,%s,%s,%s,%s,%s,%s)", (name, breed, species, age, worker_id, location, 0,vet_id,filepath))
-            mydb.commit()
+        cursor = mydb.cursor()
+        cursor.execute("SELECT * FROM workers WHERE worker_id = %s", (worker_id,))
+        workers = cursor.fetchall()  # Fetch all rows returned by the query
+        if workers: 
+            cursor.execute("SELECT * FROM vets WHERE vet_id = %s", (vet_id,))
+            vets = cursor.fetchall()  # Fetch all rows returned by the query
+            if vets:
+                if adopted:
+                    cursor.execute("SELECT * FROM adopters WHERE adopt_id = %s", (location,))
+                    adopt = cursor.fetchall()  # Fetch all rows returned by the query
+                    if adopt:
+                        cursor.execute("INSERT INTO pets (name, breed, species, age, worker_id, adopt_id, adoptered, vet_id, image_path) VALUES (%s, %s, %s,%s,%s,%s,%s,%s,%s)", (name, breed, species, age, worker_id, location, 1,vet_id,filepath))
+                        mydb.commit()
+                        return redirect('pet_page')
+                else:
+                    cursor.execute("SELECT * FROM shelters WHERE shelter_id = %s", (location,))
+                    shelter = cursor.fetchall()  # Fetch all rows returned by the query
+                    if shelter:
+                        cursor = mydb.cursor()
+                        cursor.execute("INSERT INTO pets (name, breed, species, age, worker_id, shelter_id, adoptered, vet_id,image_path) VALUES (%s, %s, %s,%s,%s,%s,%s,%s,%s)", (name, breed, species, age, worker_id, location, 0,vet_id,filepath))
+                        mydb.commit()
+                        return redirect('pet_page')
 
-        return redirect('pet_page')
+        return redirect('not_found')
     
     cursor = mydb.cursor(dictionary=True)
     cursor.execute("SELECT * FROM pets")
@@ -76,8 +90,12 @@ def sort_pet(request):
         query += f" AND name LIKE '%{name}%'"
     if breed:
         query += f" AND breed LIKE '%{breed}%'"
-    if location:
-        query += f" AND shelter_id LIKE '%{location}%'"
+    if adopted_needs_home:
+        if location:
+            query += f" AND shelter_id LIKE '%{location}%'"
+    if adopted_adopted:
+        if location:
+            query += f" AND adopt_id LIKE '%{location}%'"
     if workerId:
         query += f" AND worker_id LIKE '%{workerId}%'"
     if vetId:

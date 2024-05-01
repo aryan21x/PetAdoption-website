@@ -22,8 +22,8 @@ def vet_page(request):
         phoneNumber = request.POST.get('phoneNumber2')
         businessName = request.POST.get('businessName2')
 
-
         cursor = mydb.cursor()
+        
         cursor.execute("INSERT INTO vets (phoneNumber, businessName, address, fName, lName, email) VALUES (%s, %s, %s, %s, %s, %s)", (phoneNumber, businessName, address, fName, lName, email))
         mydb.commit()
 

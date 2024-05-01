@@ -36,6 +36,12 @@ def adopter_page(request):
 @login_required
 def delete_adopter(request, adopt_id):
     cursor = mydb.cursor()
+    
+    cursor.execute("SELECT * FROM pets WHERE adoptered = 1 AND adopt_id = %s", (adopt_id,))
+    pets = cursor.fetchall()  # Fetch all rows returned by the query
+    if pets:  # Check if there are any related pets
+        return redirect('error_page')
+    
     cursor.execute("DELETE FROM adopters WHERE adopt_id = %s", (adopt_id,))
     mydb.commit()
 
