@@ -8,6 +8,7 @@ urlpatterns = [
     path('register/',views.register,name='register'),
     path('error_page/',views.error_page,name='error_page'),
     path('not_found/',views.not_found, name='not_found'),
+    path('home/',views.home, name='home'),
 ]
 
 

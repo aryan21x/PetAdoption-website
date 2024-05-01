@@ -12,6 +12,7 @@
     <title>Home Page</title>
 </head>
 <body class="homeBackground" style="color: white;">
+    <div>
     <div class="homeElement">
         <h1 class="bold" style="font-size: 70px">Ready to adopt?</h1>
         <h7 style="font-size: 20px">We are here to help you</h7>
@@ -20,7 +21,7 @@
     {% if user.is_authenticated %}
     <div class="homeElementBtn">
         <a class="btn homeBtn" href="{% url 'pet_page' %}">Start Searching</a>
-        <a class="btn homeBtn" href="{% url 'shelter_page' %}">Shelters</a>
+        <a class="btn homeBtn" href="#look">Have a look</a>
     </div>
     {% endif %}
 
@@ -30,6 +31,56 @@
         <a class="btn homeBtn" href="{% url 'register' %}">Register</a>
     </div>
     {% endif %}
+    </div>
+    
+    <div class="gallery backGR" id="look">
+        {% for pet in pets %}
+        <a href="{% url 'homePet' pet_id=pet.pet_id %}">
+            <img src="{{ pet.image_path }}" />
+        </a>
+        {% endfor %}
+    </div>
+
 </body>
 </html>
+
+<style>
+    
+    body {
+        overflow-x: hidden;
+    }
+
+    .gallery {
+    position:absolute; 
+    top:127vh; 
+    left:0px; 
+    overflow-x: auto;
+    white-space: nowrap;
+    animation: bannermove 20s linear infinite;
+    animation-play-state:running;
+    -webkit-animation-play-state:running;
+    animation-direction: alternate-reverse
+    }
+    
+    .gallery img {    
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    object-position: 10% 20%;
+    padding: 0px;
+    }
+    
+    @keyframes bannermove {
+    0% {
+        transform: translate(-70%, 0);
+    }
+    100% {
+        transform: translate(-0%, 0);
+    }
+    }
+    
+    img:hover {
+    transform: scale(120%);
+    } 
+</style>
 {% endblock %}

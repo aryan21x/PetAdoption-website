@@ -162,3 +162,11 @@ def edit_pet(request, pet_id):
 
     return render(request, 'edit_pet.html', {'pet': pet})
 
+def homePet(request, pet_id):
+    cursor = mydb.cursor(dictionary=True)
+    query = "SELECT * FROM pets WHERE 1=1"
+    query += f" AND pet_id = '{pet_id}'"
+    cursor.execute(query)
+    pets = cursor.fetchall()
+
+    return render(request, 'pet_page.html',{'pets': pets})

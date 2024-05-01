@@ -23,8 +23,11 @@ def welcome(request):
     return render(request, 'welcome.html')
 
 
-class HomeView(TemplateView):
-    template_name = 'homeView.html'
+def home(request):
+    cursor = mydb.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM pets")
+    pets = cursor.fetchall()
+    return render(request, 'homeView.html', {'pets': pets})
 
 
 def user_login(request):
