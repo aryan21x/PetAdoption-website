@@ -113,7 +113,7 @@
                     </form> 
                 </td>
                 <td>
-                    <form method="post" action="{% url 'delete_adopter' adopter.adopt_id %}">
+                    <form class="delete-form" method="post" action="{% url 'delete_adopter' adopter.adopt_id %}">
                       {% csrf_token %}
                       <input type="submit" class="btn btn-danger btn-sm" value="Delete">
                     </form>
@@ -163,6 +163,16 @@
             document.getElementById("address").value = "";
             document.getElementById("pets").value = "";
             document.getElementById("phoneNumber").value = "";
+        });
+
+        const deleteForms = document.querySelectorAll('.delete-form');
+        deleteForms.forEach(form => {
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                if (confirm("Are you sure you want to delete this business?")) {
+                    this.submit();
+                }
+            });
         });
     });
 </script>
