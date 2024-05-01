@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %} Edit Business {% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Business</title>
+</head>
+<body class="backGround color-orange">
+    <h5>Edit Business</h5>
+    <form method="post" action="{% url 'edit_business' business.business_id %}">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="address">Address:</label>
+                <input type="text" class="form-control" id="address" name="address" value="{{ business.address }}">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="service">Service:</label>
+                <input type="text" class="form-control" id="service" name="service" value="{{ business.service }}">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" value="{{ business.phoneNumber }}">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" value="{{ business.email }}">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ business.name }}">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Business</button>
+        <a class="btn btn-primary" href="{% url 'business_page' %}">Cancel</a>
+    </form>
+</body>
+</html>
+<style>
+    .nav-link::before {
+        background-color: orange !important;
+    }
+
+    .nav-link {
+        color: orange !important;
+    }
+</style>
+{% endblock %}

@@ -28,4 +28,5 @@ urlpatterns = [
     path('', include('workers.urls')), # URL pattern for 'workers' app
     path('', include('adopters.urls')), # URL pattern for 'adopters' app
     path('', include('vets.urls')), # URL pattern for 'vets' app
+    path('', include('associatedBusiness.urls')), # URL pattern for 'business' app
 ]
