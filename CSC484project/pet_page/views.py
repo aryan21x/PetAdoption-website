@@ -26,8 +26,9 @@ def pet_page(request):
         species = request.POST.get('species2')
         age = request.POST.get('age2')
         worker_id = request.POST.get('worker_id2')
-        location = request.POST.get('location')
-        adopted = request.POST.get('adopted')
+        location = request.POST.get('location2')
+        adopted = request.POST.get('adopted2')
+        vet_id = request.POST.get('vet_id2')
         file = request.FILES.get('image')
         filepath = "/static/images/default.jpg"
 
@@ -41,11 +42,11 @@ def pet_page(request):
 
         if adopted:
             cursor = mydb.cursor()
-            cursor.execute("INSERT INTO pets (name, breed, species, age, worker_id, adopt_id, adoptered, image_path) VALUES (%s, %s, %s,%s,%s,%s,%s,%s)", (name, breed, species, age, worker_id, location, 1,filepath))
+            cursor.execute("INSERT INTO pets (name, breed, species, age, worker_id, adopt_id, adoptered, vet_id, image_path) VALUES (%s, %s, %s,%s,%s,%s,%s,%s,%s)", (name, breed, species, age, worker_id, location, 1,vet_id,filepath))
             mydb.commit()
         else:
             cursor = mydb.cursor()
-            cursor.execute("INSERT INTO pets (name, breed, species, age, worker_id, shelter_id, adoptered, image_path) VALUES (%s, %s, %s,%s,%s,%s,%s,%s)", (name, breed, species, age, worker_id, location, 0,filepath))
+            cursor.execute("INSERT INTO pets (name, breed, species, age, worker_id, shelter_id, adoptered, vet_id,image_path) VALUES (%s, %s, %s,%s,%s,%s,%s,%s,%s)", (name, breed, species, age, worker_id, location, 0,vet_id,filepath))
             mydb.commit()
 
         return redirect('pet_page')
@@ -64,6 +65,8 @@ def sort_pet(request):
     adopted_needs_home = request.GET.get('adopted_needs_home')
     adopted_adopted = request.GET.get('adopted_adopted')
     workerId = request.GET.get('worker_id')
+    vetId = request.GET.get('vet_id')
+    location = request.GET.get('location')
     
     cursor = mydb.cursor(dictionary=True)
     query = "SELECT * FROM pets WHERE 1=1"
@@ -73,8 +76,12 @@ def sort_pet(request):
         query += f" AND name LIKE '%{name}%'"
     if breed:
         query += f" AND breed LIKE '%{breed}%'"
+    if location:
+        query += f" AND shelter_id LIKE '%{location}%'"
     if workerId:
         query += f" AND worker_id LIKE '%{workerId}%'"
+    if vetId:
+        query += f" AND vet_id LIKE '{vetId}'"
     if species:
         query += f" AND species LIKE '%{species}%'"
     if age:
@@ -118,14 +125,15 @@ def edit_pet(request, pet_id):
         adopted = request.POST.get('adopted')
         species = request.POST.get('species')
         age = request.POST.get('age')
+        vet_id = request.POST.get('vet_id')
 
         if adopted:
             cursor = mydb.cursor()
-            cursor.execute("UPDATE pets SET name=%s, breed=%s, worker_id=%s, adopt_id=%s, adoptered=%s, species=%s, age=%s WHERE pet_id=%s", (name, breed, worker_id, location, 1, species, age, pet_id))
+            cursor.execute("UPDATE pets SET name=%s, breed=%s, worker_id=%s, adopt_id=%s, adoptered=%s, species=%s, age=%s, vet_id=%s WHERE pet_id=%s", (name, breed, worker_id, location, 1, species, age, vet_id, pet_id))
             mydb.commit()
         else:
             cursor = mydb.cursor()
-            cursor.execute("UPDATE pets SET name=%s, breed=%s, worker_id=%s, sheltert_id=%s, adoptered=%s, species=%s, age=%s WHERE pet_id=%s", (name, breed, worker_id, location, 0, species, age, pet_id))
+            cursor.execute("UPDATE pets SET name=%s, breed=%s, worker_id=%s, shelter_id=%s, adoptered=%s, species=%s, age=%s, vet_id=%s WHERE pet_id=%s", (name, breed, worker_id, location, 0, species, age, vet_id, pet_id))
             mydb.commit()
 
         return redirect('pet_page')
