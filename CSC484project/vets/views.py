@@ -49,25 +49,26 @@ def delete_vet(request, vet_id):
     return redirect('vet_page')
 
 @login_required
-def edit_vet(request, worker_id):
+def edit_vet(request, vet_id):
     if request.method == 'POST':
-        address = request.POST.get('address2')
-        fName = request.POST.get('fName2')
-        shelter_id = request.POST.get('shelter_id2')
-        lName = request.POST.get('lName2')
-        email = request.POST.get('email2')
+        address = request.POST.get('address')
+        fName = request.POST.get('fName')
+        phoneNumber = request.POST.get('phoneNumber')
+        businessName = request.POST.get('businessName')
+        lName = request.POST.get('lName')
+        email = request.POST.get('email')
 
         cursor = mydb.cursor()
-        cursor.execute("UPDATE workers SET address=%s, fName=%s, shelter_id=%s, lName=%s WHERE worker_id=%s", (address, fName, shelter_id, lName, worker_id))
+        cursor.execute("UPDATE vets SET address=%s, fName=%s, phoneNumber=%s, lName=%s, businessName=%s, email=%s WHERE vet_id=%s", (address, fName, phoneNumber, lName, businessName, email, vet_id))
         mydb.commit()
 
-        return redirect('worker_page')
+        return redirect('vet_page')
     
     cursor = mydb.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM workers WHERE worker_id = %s", (worker_id,))
-    workers = cursor.fetchone()
+    cursor.execute("SELECT * FROM vets WHERE vet_id = %s", (vet_id,))
+    vets = cursor.fetchone()
 
-    return render(request, 'edit_worker.html', {'worker': workers})
+    return render(request, 'edit_vet.html', {'vet': vets})
 
 @login_required
 def sort_vet(request):
