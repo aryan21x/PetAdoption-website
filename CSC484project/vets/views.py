@@ -15,18 +15,19 @@ mydb = mysql.connector.connect(
 @login_required
 def vet_page(request):
     if request.method == 'POST':
-        address = request.POST.get('address2')
         fName = request.POST.get('fName2')
-        shelter_id = request.POST.get('shelter_id2')
         lName = request.POST.get('lName2')
+        address = request.POST.get('address2')
         email = request.POST.get('email2')
+        phoneNumber = request.POST.get('phoneNumber2')
+        businessName = request.POST.get('businessName2')
 
 
         cursor = mydb.cursor()
-        cursor.execute("INSERT INTO workers (shelter_id, address, fName, lName, email) VALUES (%s, %s, %s, %s, %s)", (shelter_id, address, fName, lName, email))
+        cursor.execute("INSERT INTO vets (phoneNumber, businessName, address, fName, lName, email) VALUES (%s, %s, %s, %s, %s, %s)", (phoneNumber, businessName, address, fName, lName, email))
         mydb.commit()
 
-        return redirect('worker_page')
+        return redirect('vet_page')
 
     cursor = mydb.cursor(dictionary=True)
     cursor.execute("SELECT * FROM vets")
@@ -35,17 +36,17 @@ def vet_page(request):
 
 
 @login_required
-def delete_vet(request, worker_id):
+def delete_vet(request, vet_id):
     cursor = mydb.cursor()
-    cursor.execute("SELECT * FROM pets WHERE worker_id = %s", (worker_id,))
+    cursor.execute("SELECT * FROM pets WHERE vet_id = %s", (vet_id,))
     pets = cursor.fetchall()  # Fetch all rows returned by the query
     if pets:  # Check if there are any related pets
         return redirect('error_page')
 
-    cursor.execute("DELETE FROM workers WHERE worker_id = %s", (worker_id,))
+    cursor.execute("DELETE FROM vets WHERE vet_id = %s", (vet_id,))
     mydb.commit()
 
-    return redirect('worker_page')
+    return redirect('vet_page')
 
 @login_required
 def edit_vet(request, worker_id):
@@ -70,32 +71,35 @@ def edit_vet(request, worker_id):
 
 @login_required
 def sort_vet(request):
-    address = request.GET.get('address')
-    shelter_id = request.GET.get('shelter_id')
-    fName = request.GET.get('fName')
-    lName = request.GET.get('lName')
-    email = request.GET.get('email')
-    worker_id = request.GET.get('worker_id')
+    address = request.GET.get('addressS')
+    vet_id = request.GET.get('vet_idS')
+    fName = request.GET.get('fNameS')
+    lName = request.GET.get('lNameS')
+    email = request.GET.get('emailS')
+    phoneNumber = request.GET.get('phoneNumberS')
+    businessName = request.GET.get('businessS')
     
     
     cursor = mydb.cursor(dictionary=True)
-    query = "SELECT * FROM workers WHERE 1=1" 
+    query = "SELECT * FROM vets WHERE 1=1" 
     
     # Adding filters based on provided criteria
     if address:
         query += f" AND address LIKE '%{address}%'"
     if email:
         query += f" AND email LIKE '%{email}%'"
-    if worker_id:
-        query += f" AND worker_id LIKE '%{worker_id}%'"
-    if shelter_id:
-        query += f" AND shelter_id LIKE '%{shelter_id}%'"
+    if vet_id:
+        query += f" AND vet_id LIKE '%{vet_id}%'"
+    if phoneNumber:
+        query += f" AND phoneNumber LIKE '%{phoneNumber}%'"
+    if businessName:
+        query += f" AND businessName LIKE '%{businessName}%'"
     if fName:
         query += f" AND fName LIKE '%{fName}%'"
     if lName:
         query += f" AND lName LIKE '%{lName}%'"
     
     cursor.execute(query)
-    workers = cursor.fetchall()
+    vets = cursor.fetchall()
 
-    return render(request, 'worker_page.html', {'workers': workers})
+    return render(request, 'vet_page.html', {'vets': vets})

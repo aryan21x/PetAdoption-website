@@ -14,17 +14,9 @@
         <h1 class="d-inline">Vets</h1>
         <button id="toggleOn" class="btn btn-primary ml-3">Add Vet</button>
     </div>
-    <form id="petForm" method="post">
+    <form id="petForm" method="POST">
         {% csrf_token %}
         <div class="form-row">
-            <div class="form-group col-md-3">
-                <label for="shelter_id">Shelter Id:</label>
-                <input type="number" class="form-control" id="shelter_id2" name="shelter_id2" required>
-            </div>
-            <div class="form-group col-md-3">
-                <label for="address">Address:</label>
-                <input type="text" class="form-control" id="address2" name="address2" required>
-            </div>
             <div class="form-group col-md-3">
                 <label for="fName">First Name:</label>
                 <input type="text" class="form-control" id="fName2" name="fName2" required>
@@ -34,41 +26,57 @@
                 <input type="text" class="form-control" id="lName2" name="lName2" required>
             </div>
             <div class="form-group col-md-3">
+                <label for="address">Address:</label>
+                <input type="text" class="form-control" id="address2" name="address2" required>
+            </div>
+            <div class="form-group col-md-3">
                 <label for="email">Email:</label>
-                <input type="text" class="form-control" id="email2" name="email2" required>
+                <input type="text" class="form-control" id="email2" name="email2">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="phoneNumber">Phonenumber:</label>
+                <input type="text" class="form-control" id="phoneNumber2" name="phoneNumber2">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="businessName">Business Name:</label>
+                <input type="text" class="form-control" id="businessName2" name="businessName2">
             </div>
         </div>
         <div class="d-inline">
-            <button type="submit" class="btn btn-primary mr-2">Add Worker</button>
+            <button type="submit" class="btn btn-primary mr-2">Add vet</button>
             <button id="toggleoff" class="btn btn-primary">Cancel</button>
         </div>
     </form>
-    <form method="get" action="{% url 'sort_worker' %}">
+    <form method="get" action="{% url 'sort_vet' %}">
         {% csrf_token %}
         <div class="form-row">
             <div class="form-group col-md-3">
-                <label for="worker_id">Vet Id:</label>
-                <input type="number" class="form-control" id="vet_id" name="vet_id" value="{{ request.GET.vet_id }}">
+                <label for="vet_id">Vet Id:</label>
+                <input type="number" class="form-control" id="vet_idS" name="vet_idS" value="{{ request.GET.vet_idS }}">
             </div>
             <div class="form-group col-md-3">
                 <label for="fName">First Name:</label>
-                <input type="text" class="form-control" id="fName" name="fName" value="{{ request.GET.fName }}">
+                <input type="text" class="form-control" id="fNameS" name="fNameS" value="{{ request.GET.fNameS }}">
             </div>
             <div class="form-group col-md-3">
                 <label for="lName">Last Name:</label>
-                <input type="text" class="form-control" id="lName" name="lName" value="{{ request.GET.lName }}">
+                <input type="text" class="form-control" id="lNameS" name="lNameS" value="{{ request.GET.lNameS }}">
             </div>
             <div class="form-group col-md-3">
                 <label for="email">Email:</label>
-                <input type="text" class="form-control" id="email" name="email" value="{{ request.GET.email }}">
+                <input type="text" class="form-control" id="emailS" name="emailS" value="{{ request.GET.emailS }}">
             </div>
             <div class="form-group col-md-3">
                 <label for="address">Address:</label>
-                <input type="text" class="form-control" id="address" name="address" value="{{ request.GET.address }}">
+                <input type="text" class="form-control" id="addressS" name="addressS" value="{{ request.GET.addressS }}">
             </div>
             <div class="form-group col-md-3">
-                <label for="shelter_id">Shelter ID:</label>
-                <input type="number" class="form-control" id="shelter_id" name="shelter_id" value="{{ request.GET.shelter_id }}">
+                <label for="phoneNumber">Phonenumber:</label>
+                <input type="text" class="form-control" id="phoneNumberS" name="phoneNumberS" value="{{ request.GET.phoneNumberS }}">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="business">Business Name:</label>
+                <input type="text" class="form-control" id="businessS" name="businessS" value="{{ request.GET.businessS }}">
             </div>
             <div class="d-flex align-items-center">
                 <button type="submit" class="btn btn-primary mr-2">
@@ -105,7 +113,7 @@
                 <td class="outlined">{{ vet.businessName }}</td>
                 <!-- Add other columns as needed -->
                 <td>
-                    <a href="{% url 'edit_worker' vet.vet_id %}" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="{% url 'edit_vet' vet.vet_id %}" class="btn btn-primary btn-sm">Edit</a>
                 </td>
                 <td>
                     <form method="post" action="{% url 'delete_vet' vet.vet_id %}">
@@ -153,12 +161,13 @@
         });
         
         clearFilterButton.addEventListener("click", function() {
-            document.getElementById("fName").value = "";
-            document.getElementById("lName").value = "";
-            document.getElementById("shelter_id").value = "";
-            document.getElementById("address").value = "";
-            document.getElementById("worker_id").value = "";
-            document.getElementById("email").value = "";
+            document.getElementById("fNameS").value = "";
+            document.getElementById("lNameS").value = "";
+            document.getElementById("vet_idS").value = "";
+            document.getElementById("addressS").value = "";
+            document.getElementById("businessS").value = "";
+            document.getElementById("emailS").value = "";
+            document.getElementById("phoneNumberS").value = "";
         });
     });
 </script>
