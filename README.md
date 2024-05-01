@@ -1,4 +1,3 @@
-
-# CSC484Project
-Authors: Aryan Raval and Augustus Miller
 PET ADOPTION WEBSITE
+A group project made by : Aryan Raval and Augustus Miller
+
