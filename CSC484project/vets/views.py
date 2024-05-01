@@ -89,7 +89,7 @@ def sort_vet(request):
     if email:
         query += f" AND email LIKE '%{email}%'"
     if vet_id:
-        query += f" AND vet_id LIKE '%{vet_id}%'"
+        query += f" AND vet_id LIKE '{vet_id}'"
     if phoneNumber:
         query += f" AND phoneNumber LIKE '%{phoneNumber}%'"
     if businessName:

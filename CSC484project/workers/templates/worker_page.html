@@ -106,7 +106,7 @@
                     <a href="{% url 'edit_worker' worker.worker_id %}" class="btn btn-primary btn-sm">Edit</a>
                 </td>
                 <td>
-                    <form method="post" action="{% url 'delete_worker' worker.worker_id %}">
+                    <form class="delete-form" method="post" action="{% url 'delete_worker' worker.worker_id %}">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                     </form>
@@ -157,6 +157,16 @@
             document.getElementById("address").value = "";
             document.getElementById("worker_id").value = "";
             document.getElementById("email").value = "";
+        });
+
+        const deleteForms = document.querySelectorAll('.delete-form');
+        deleteForms.forEach(form => {
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                if (confirm("Are you sure you want to delete this business?")) {
+                    this.submit();
+                }
+            });
         });
     });
 </script>
