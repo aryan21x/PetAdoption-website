@@ -28,6 +28,10 @@
                     <input type="text" class="form-control" id="worker_id" name="worker_id" value="{{ pet.worker_id }}">
                 </div>
                 <div class="form-group col-md-3">
+                    <label for="breed">Vet Id:</label>
+                    <input type="text" class="form-control" id="vet_id" name="vet_id" value="{{ pet.vet_id }}">
+                </div>
+                <div class="form-group col-md-3">
                     <label for="species">Species:</label>
                     <input type="text" class="form-control" id="species" name="species" value="{{ pet.species }}">
                 </div>
@@ -37,18 +41,22 @@
                 </div>
                 {% if pet.adoptered == 1 %}
                     <div class="form-group col-md-3">
-                        <label for="age">Location:</label>
+                        <label for="age">New Location Id:</label>
                         <input type="text" class="form-control" id="location" name="location" value="{{ pet.adopt_id }}">
                     </div>
                 {% else %}
                     <div class="form-group col-md-3">
-                        <label for="age">Location Id:</label>
+                        <label for="age">Shelter Id:</label>
                         <input type="text" class="form-control" id="location" name="location" value="{{ pet.shelter_id }}">
                     </div>
                 {% endif %}    
                 <div class="form-group col-md-3">
                     <label for="adopted">Adopted:</label><br>
-                    <input type="checkbox" id="adopted" name="adopted" value="adopted">
+                    {% if pet.adoptered == 1 %}
+                        <input type="checkbox" id="adopted" name="adopted" checked>
+                    {% else %}
+                        <input type="checkbox" id="adopted" name="adopted">
+                    {% endif %}  
                     <label for="adopted">Adopted</label>
                 </div>
 
