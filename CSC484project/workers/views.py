@@ -24,10 +24,16 @@ def worker_page(request):
 
 
         cursor = mydb.cursor()
-        cursor.execute("INSERT INTO workers (shelter_id, address, fName, lName, email) VALUES (%s, %s, %s, %s, %s)", (shelter_id, address, fName, lName, email))
-        mydb.commit()
+        cursor.execute("SELECT * FROM shelters WHERE shelter_id = %s", (shelter_id,))
+        shelters = cursor.fetchall()  # Fetch all rows returned by the query
+        if shelters: 
+            cursor.execute("INSERT INTO workers (shelter_id, address, fName, lName, email) VALUES (%s, %s, %s, %s, %s)", (shelter_id, address, fName, lName, email))
+            mydb.commit()
 
-        return redirect('worker_page')
+            return redirect('worker_page')
+
+
+        return redirect('not_found')
 
     cursor = mydb.cursor(dictionary=True)
     cursor.execute("SELECT * FROM workers")
@@ -38,6 +44,7 @@ def worker_page(request):
 @login_required
 def delete_worker(request, worker_id):
     cursor = mydb.cursor()
+
     cursor.execute("SELECT * FROM pets WHERE worker_id = %s", (worker_id,))
     pets = cursor.fetchall()  # Fetch all rows returned by the query
     if pets:  # Check if there are any related pets

@@ -16,6 +16,9 @@ mydb = mysql.connector.connect(
 def error_page(request):
     return render(request, 'error_page.html')
 
+def not_found(request):
+    return render(request, 'not_found.html')
+
 def welcome(request):
     return render(request, 'welcome.html')
 

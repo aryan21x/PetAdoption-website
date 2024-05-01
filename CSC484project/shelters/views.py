@@ -34,6 +34,17 @@ def shelter_page(request):
 @login_required
 def delete_shelter(request, shelter_id):
     cursor = mydb.cursor()
+
+    cursor.execute("SELECT * FROM workers WHERE shelter_id = %s", (shelter_id,))
+    workers = cursor.fetchall()  # Fetch all rows returned by the query
+    if workers:  # Check if there are any related pets
+        return redirect('error_page')
+    
+    cursor.execute("SELECT * FROM pets WHERE adoptered = 0 AND shelter_id = %s", (shelter_id,))
+    pets = cursor.fetchall()  # Fetch all rows returned by the query
+    if pets:  # Check if there are any related pets
+        return redirect('error_page')
+
     cursor.execute("DELETE FROM shelters WHERE shelter_id = %s", (shelter_id,))
     mydb.commit()
 
